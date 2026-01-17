@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('writing');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout title={`${post.data.title} — Writing`}>
+  
+  <article class="max-w-3xl">
+    <h1 class="text-5xl font-black uppercase mb-4 border-b-4 border-black dark:border-white pb-4">
+      {post.data.title}
+    </h1>
+    <time class="text-sm opacity-70 uppercase mb-8 block">{new Date(post.data.date).toLocaleDateString()}</time>
+    
+    <div class="prose prose-lg dark:prose-invert font-mono max-w-none">
+      <Content />
+    </div>
+
+    <div class="mt-12 pt-8 border-t-4 border-black dark:border-white">
+      <a href="/writing" class="uppercase font-bold hover:underline">← Back to Writing</a>
+    </div>
+  </article>
+
+</BaseLayout>

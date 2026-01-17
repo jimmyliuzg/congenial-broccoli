@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<BaseLayout title={`${project.data.title} — Projects`}>
+  
+  <article class="max-w-4xl">
+    <h1 class="text-5xl font-black uppercase mb-4 border-b-4 border-black dark:border-white pb-4">
+      {project.data.title}
+    </h1>
+    <p class="text-xl opacity-70 mb-8">{project.data.description}</p>
+    
+    {project.data.demoUrl && (
+      <div class="mb-12 border-4 border-black dark:border-white">
+        <iframe src={project.data.demoUrl} class="w-full h-[600px]" title={`${project.data.title} Demo`}></iframe>
+      </div>
+    )}
+    
+    <div class="prose prose-lg dark:prose-invert font-mono max-w-none">
+      <Content />
+    </div>
+
+    <div class="mt-12 pt-8 border-t-4 border-black dark:border-white flex gap-4">
+      {project.data.githubUrl && (
+        <a href={project.data.githubUrl} target="_blank" class="px-6 py-3 border-4 border-black dark:border-white uppercase font-bold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition">
+          GitHub →
+        </a>
+      )}
+      {project.data.liveUrl && (
+        <a href={project.data.liveUrl} target="_blank" class="px-6 py-3 bg-black text-white dark:bg-white dark:text-black uppercase font-bold hover:opacity-80 transition">
+          Live Site →
+        </a>
+      )}
+    </div>
+  </article>
+
+</BaseLayout>

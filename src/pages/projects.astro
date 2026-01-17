@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+---
+
+<BaseLayout title="Projects — [YOUR NAME]"> <!-- ← USER INPUT NEEDED -->
+  
+  <h1 class="text-5xl font-black uppercase mb-12 border-b-4 border-black dark:border-white pb-4">Projects</h1>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {projects.map(project => (
+      <a href={`/projects/${project.slug}`} class="group border-4 border-black dark:border-white overflow-hidden hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] transition-all">
+        {project.data.thumbnail && (
+          <img src={project.data.thumbnail} alt={project.data.title} class="w-full h-48 object-cover border-b-4 border-black dark:border-white" />
+        )}
+        <div class="p-6">
+          <h2 class="text-2xl font-bold mb-2">{project.data.title}</h2>
+          <p class="text-sm opacity-70 mb-4">{project.data.description}</p>
+          <div class="flex flex-wrap gap-2">
+            {project.data.tags?.map((tag: string) => (
+              <span class="text-xs px-2 py-1 border-2 border-black dark:border-white">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+
+</BaseLayout>

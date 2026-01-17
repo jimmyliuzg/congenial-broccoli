@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const featuredProjects = (await getCollection('projects')).slice(0, 3);
+const recentPosts = (await getCollection('writing')).slice(0, 3);
+---
+
+<BaseLayout title="[YOUR NAME] — Portfolio & Resume"> <!-- ← USER INPUT NEEDED -->
+  
+  <!-- Hero Section -->
+  <section class="min-h-[80vh] flex flex-col justify-center border-b-4 border-black dark:border-white pb-16">
+    <h1 class="text-5xl md:text-7xl font-black uppercase leading-tight mb-6">
+      [YOUR TAGLINE] <!-- ← USER INPUT NEEDED (e.g., "Building Experiments at the Intersection of Code & Design") -->
+    </h1>
+    <p class="text-xl md:text-2xl max-w-3xl mb-8">
+      [SHORT BIO PARAGRAPH — 2-3 sentences about what you do, your interests, and what visitors will find here] <!-- ← USER INPUT NEEDED -->
+    </p>
+    <div class="flex gap-4">
+      <a href="/projects" class="px-8 py-4 bg-black text-white dark:bg-white dark:text-black font-bold uppercase hover:opacity-80 transition">
+        View Projects →
+      </a>
+      <a href="[LINK TO RESUME PDF]" target="_blank" class="px-8 py-4 border-4 border-black dark:border-white font-bold uppercase hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"> <!-- ← USER INPUT NEEDED -->
+        Resume
+      </a>
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="py-16 border-b-4 border-black dark:border-white">
+    <h2 class="text-4xl font-black uppercase mb-8">Featured Projects</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {featuredProjects.map(project => (
+        <a href={`/projects/${project.slug}`} class="group border-4 border-black dark:border-white p-6 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition">
+          <h3 class="text-2xl font-bold mb-2">{project.data.title}</h3>
+          <p class="text-sm opacity-70">{project.data.description}</p>
+          <p class="mt-4 uppercase text-xs font-bold">View →</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Recent Writing -->
+  <section class="py-16">
+    <h2 class="text-4xl font-black uppercase mb-8">Recent Writing</h2>
+    <ul class="space-y-4">
+      {recentPosts.map(post => (
+        <li class="border-l-4 border-black dark:border-white pl-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition p-4">
+          <a href={`/writing/${post.slug}`} class="flex justify-between items-start">
+            <div>
+              <h3 class="text-xl font-bold">{post.data.title}</h3>
+              <p class="text-sm opacity-70">{post.data.description}</p>
+            </div>
+            <span class="text-xs uppercase">{new Date(post.data.date).toLocaleDateString()}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a href="/writing" class="inline-block mt-8 px-6 py-3 border-4 border-black dark:border-white uppercase font-bold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition">
+      All Posts →
+    </a>
+  </section>
+
+</BaseLayout>

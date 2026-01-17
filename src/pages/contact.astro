@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Contact — [YOUR NAME]"> <!-- ← USER INPUT NEEDED -->
+  
+  <section class="max-w-2xl">
+    <h1 class="text-5xl font-black uppercase mb-8 border-b-4 border-black dark:border-white pb-4">Contact</h1>
+    
+    <p class="text-xl mb-12">
+      [CONTACT INTRO — e.g., "Let's connect! Feel free to reach out for collaborations, opportunities, or just to say hi."] <!-- ← USER INPUT NEEDED -->
+    </p>
+
+    <div class="space-y-6 mb-12">
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="block px-8 py-6 border-4 border-black dark:border-white text-2xl font-bold uppercase hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"> <!-- ← USER INPUT NEEDED -->
+        LinkedIn →
+      </a>
+      <a href="[LINK TO RESUME PDF]" target="_blank" class="block px-8 py-6 border-4 border-black dark:border-white text-2xl font-bold uppercase hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"> <!-- ← USER INPUT NEEDED -->
+        Download Resume →
+      </a>
+      <a href="mailto:your@email.com" class="block px-8 py-6 bg-black text-white dark:bg-white dark:text-black text-2xl font-bold uppercase hover:opacity-80 transition"> <!-- ← USER INPUT NEEDED -->
+        Email Me →
+      </a>
+    </div>
+
+    <!-- Optional: Simple contact form (requires backend or form service like Formspree) -->
+    <form action="https://formspree.io/f/[YOUR_FORM_ID]" method="POST" class="space-y-6"> <!-- ← USER INPUT NEEDED (sign up at formspree.io) -->
+      <div>
+        <label for="name" class="block text-sm uppercase font-bold mb-2">Name</label>
+        <input type="text" id="name" name="name" required class="w-full p-4 border-4 border-black dark:border-white bg-transparent focus:outline-none focus:ring-4 focus:ring-black dark:focus:ring-white" />
+      </div>
+      <div>
+        <label for="email" class="block text-sm uppercase font-bold mb-2">Email</label>
+        <input type="email" id="email" name="email" required class="w-full p-4 border-4 border-black dark:border-white bg-transparent focus:outline-none focus:ring-4 focus:ring-black dark:focus:ring-white" />
+      </div>
+      <div>
+        <label for="message" class="block text-sm uppercase font-bold mb-2">Message</label>
+        <textarea id="message" name="message" rows="6" required class="w-full p-4 border-4 border-black dark:border-white bg-transparent focus:outline-none focus:ring-4 focus:ring-black dark:focus:ring-white"></textarea>
+      </div>
+      <button type="submit" class="px-8 py-4 bg-black text-white dark:bg-white dark:text-black font-bold uppercase hover:opacity-80 transition">
+        Send Message →
+      </button>
+    </form>
+
+  </section>
+
+</BaseLayout>

@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('writing')).sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout title="Writing — [YOUR NAME]"> <!-- ← USER INPUT NEEDED -->
+  
+  <h1 class="text-5xl font-black uppercase mb-12 border-b-4 border-black dark:border-white pb-4">Writing</h1>
+  
+  <ul class="space-y-6">
+    {posts.map(post => (
+      <li class="border-l-4 border-black dark:border-white pl-6 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition p-6">
+        <a href={`/writing/${post.slug}`} class="flex justify-between items-start gap-8">
+          <div>
+            <h2 class="text-3xl font-bold mb-2">{post.data.title}</h2>
+            <p class="opacity-70 mb-4">{post.data.description}</p>
+          </div>
+          <time class="text-sm uppercase whitespace-nowrap">{new Date(post.data.date).toLocaleDateString()}</time>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+</BaseLayout>
