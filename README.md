@@ -1,64 +1,39 @@
-# congenial-broccoli
-Experiment in creating a personal website with the help of AI. 
+# Jimmy's Portfolio Website
+This website was built as an experiment in AI-assisted development. The goal was to explore how AI tools can accelerate the creation of modern, production-ready web applications while maintaining design quality and code standards.
 
-```sh
-npm create astro@latest -- --template minimal
-```
+## ✨ Features
+- Brutalist Design: Bold borders, high contrast, monospace typography
+- Content Collections: Markdown-based blog posts and project showcases
+- Dark Mode: Seamless theme switching with persistent user preference
+- Responsive: Mobile-first design that works on all devices
+- Fast: Built with Astro for speed
+- Type-Safe: Content schemas validated with Zod
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 📂 Project Structure
 
-## 🚀 Project Structure
+src/
+├── components/       # Reusable UI components (Nav, Footer)
+├── content/          # Markdown content collections
+│   ├── projects/    # Project case studies
+│   └── writing/     # Blog posts
+├── layouts/         # Page layouts and templates
+├── pages/           # Route-based pages
+│   ├── index.astro
+│   ├── about.astro
+│   ├── projects/[slug].astro
+│   └── writing/[slug].astro
+└── styles/          # Global styles and Tailwind config
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🎨 Customization
+The site's visual design is controlled through tailwind.config.cjs. Key customization points:
+- Colors: Edit the color palette for light/dark modes
+- Fonts: Modify fontFamily settings (currently using Courier Prime and Inter)
+- Content: Add markdown files to src/content/projects/ or src/content/writing/
+- For detailed customization instructions, see GUIDE.md.
 
-```text
-/
-├── src/
-│   ├── layouts/
-│   │   └── BaseLayout.astro
-│   ├── pages/
-│   │   ├── index.astro
-│   │   ├── about.astro
-│   │   ├── projects.astro
-│   │   ├── projects/[slug].astro
-│   │   ├── writing.astro
-│   │   └── writing/[slug].astro
-│   ├── components/
-│   │   ├── Nav.astro
-│   │   ├── ProjectCard.astro
-│   │   ├── Footer.astro
-│   │   └── DarkModeToggle.astro
-│   └── content/
-│       ├── projects/
-│       │   └── example-project.md
-│       └── writing/
-│           └── example-post.md
-├── public/
-│   └── assets/
-├── astro.config.mjs
-├── tailwind.config.cjs
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 🛠️ Tech Stack
+- Astro - Static site framework
+- Tailwind CSS - Utility-first CSS framework
+- TypeScript - Type safety
+- Zod - Content schema validation
+- Claude Models through Cursor/Perplexity
