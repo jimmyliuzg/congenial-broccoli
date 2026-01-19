@@ -17,32 +17,41 @@ const { Content } = await project.render();
 <BaseLayout title={`${project.data.title} — Projects`}>
   
   <article class="max-w-4xl">
-    <h1 class="text-5xl font-black uppercase mb-4 border-b-4 border-black dark:border-white pb-4">
+    <h1 class="text-4xl font-bold mb-4 text-logic-link dark:text-brutal-dark-text">
       {project.data.title}
     </h1>
-    <p class="text-xl opacity-70 mb-8">{project.data.description}</p>
+    <p class="text-lg opacity-80 mb-8 text-logic-text dark:text-brutal-dark-text">{project.data.description}</p>
+    
+    {project.data.thumbnail && (
+      <div class="mb-8">
+        <img src={project.data.thumbnail} alt={project.data.title} class="w-full object-cover" />
+      </div>
+    )}
     
     {project.data.demoUrl && (
-      <div class="mb-12 border-4 border-black dark:border-white">
+      <div class="mb-12 border border-gray-300 dark:border-gray-700">
         <iframe src={project.data.demoUrl} class="w-full h-[600px]" title={`${project.data.title} Demo`}></iframe>
       </div>
     )}
     
-    <div class="prose prose-lg dark:prose-invert font-mono max-w-none">
+    <div class="prose prose-lg dark:prose-invert max-w-none text-logic-text dark:text-brutal-dark-text">
       <Content />
     </div>
 
-    <div class="mt-12 pt-8 border-t-4 border-black dark:border-white flex gap-4">
+    <div class="mt-12 pt-8 border-t border-gray-300 dark:border-gray-700 flex gap-4">
       {project.data.githubUrl && (
-        <a href={project.data.githubUrl} target="_blank" class="px-6 py-3 border-4 border-black dark:border-white uppercase font-bold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition">
-          GitHub →
+        <a href={project.data.githubUrl} target="_blank" rel="noopener" class="text-sm underline text-logic-link dark:text-brutal-dark-text">
+          View on GitHub →
         </a>
       )}
       {project.data.liveUrl && (
-        <a href={project.data.liveUrl} target="_blank" class="px-6 py-3 bg-black text-white dark:bg-white dark:text-black uppercase font-bold hover:opacity-80 transition">
+        <a href={project.data.liveUrl} target="_blank" rel="noopener" class="text-sm underline text-logic-link dark:text-brutal-dark-text">
           Live Site →
         </a>
       )}
+      <a href="/projects" class="text-sm underline text-logic-link dark:text-brutal-dark-text">
+        ← Back to Projects
+      </a>
     </div>
   </article>
 

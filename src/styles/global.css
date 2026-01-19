@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Link styling - LOGIC style (blue) for light mode, white for dark mode */
+@layer base {
+  a {
+    @apply text-logic-link dark:text-brutal-dark-text;
+  }
+  
+  a:hover {
+    @apply opacity-70;
+  }
+}
+
+/* Outlined text style for logo/name */
+@layer utilities {
+  .outlined-text {
+    -webkit-text-stroke: 2px currentColor;
+    -webkit-text-fill-color: transparent;
+    text-stroke: 2px currentColor;
+    text-fill-color: transparent;
+  }
+}

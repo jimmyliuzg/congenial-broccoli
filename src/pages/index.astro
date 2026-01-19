@@ -2,63 +2,113 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const featuredProjects = (await getCollection('projects')).slice(0, 3);
-const recentPosts = (await getCollection('writing')).slice(0, 3);
+// Get all posts and projects, sorted by date (newest first)
+const allPosts = (await getCollection('writing')).sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const allProjects = (await getCollection('projects')).sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// Decorative emoticon - EASY TO CHANGE: Just replace the text below
+// This appears at the top of the main content area
+const decorativeEmoji = '૮・ﻌ・ა♡‧₊˚';
 ---
 
-<BaseLayout title="[YOUR NAME] — Portfolio & Resume"> <!-- ← USER INPUT NEEDED -->
+<BaseLayout title="Jimmy Liu — Portfolio & Resume"> 
   
-  <!-- Hero Section -->
-  <section class="min-h-[80vh] flex flex-col justify-center border-b-4 border-black dark:border-white pb-16">
-    <h1 class="text-5xl md:text-7xl font-black uppercase leading-tight mb-6">
-      [YOUR TAGLINE] <!-- ← USER INPUT NEEDED (e.g., "Building Experiments at the Intersection of Code & Design") -->
-    </h1>
-    <p class="text-xl md:text-2xl max-w-3xl mb-8">
-      [SHORT BIO PARAGRAPH — 2-3 sentences about what you do, your interests, and what visitors will find here] <!-- ← USER INPUT NEEDED -->
+  <!-- Decorative Element -->
+  <div class="mb-6 text-2xl">
+    {decorativeEmoji}
+  </div>
+
+  <!-- Introduction -->
+  <div class="mb-12 max-w-3xl">
+    <p class="mb-4 text-logic-text dark:text-brutal-dark-text">
+      I am a [YOUR ROLE/TITLE] who [WHAT YOU DO]. Want to know more? <a href="/about" class="underline text-logic-link dark:text-brutal-dark-text">Read more about me</a>.
     </p>
-    <div class="flex gap-4">
-      <a href="/projects" class="px-8 py-4 bg-black text-white dark:bg-white dark:text-black font-bold uppercase hover:opacity-80 transition">
-        View Projects →
-      </a>
-      <a href="[LINK TO RESUME PDF]" target="_blank" class="px-8 py-4 border-4 border-black dark:border-white font-bold uppercase hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"> <!-- ← USER INPUT NEEDED -->
-        Resume
-      </a>
-    </div>
-  </section>
+    <p class="text-logic-text dark:text-brutal-dark-text">
+      Like my work? <a href="/projects" class="underline text-logic-link dark:text-brutal-dark-text">View my projects</a>.
+    </p>
+  </div>
 
-  <!-- Featured Projects -->
-  <section class="py-16 border-b-4 border-black dark:border-white">
-    <h2 class="text-4xl font-black uppercase mb-8">Featured Projects</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {featuredProjects.map(project => (
-        <a href={`/projects/${project.slug}`} class="group border-4 border-black dark:border-white p-6 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition">
-          <h3 class="text-2xl font-bold mb-2">{project.data.title}</h3>
-          <p class="text-sm opacity-70">{project.data.description}</p>
-          <p class="mt-4 uppercase text-xs font-bold">View →</p>
-        </a>
-      ))}
+  <!-- Writings Section -->
+  {allPosts.length > 0 && (
+    <div class="mb-16">
+      <p class="mb-4 text-sm text-logic-text dark:text-brutal-dark-text">
+        Here's what I have for you so far:
+      </p>
+      
+      <h2 class="text-3xl font-bold mb-8 text-logic-link dark:text-brutal-dark-text">Writings</h2>
+      
+      <div class="space-y-8">
+        {allPosts.map(post => {
+        const postDate = new Date(post.data.date);
+        const isRecent = (Date.now() - postDate.getTime()) < 90 * 24 * 60 * 60 * 1000; // Within last 90 days
+        const status = isRecent ? '(Recent)' : '';
+        
+        return (
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-2">
+              <a href={`/writing/${post.slug}`} class="underline text-logic-link dark:text-brutal-dark-text hover:opacity-70">
+                {post.data.title}
+              </a>
+              {status && <span class="text-sm font-normal text-logic-text dark:text-brutal-dark-text"> {status}</span>}
+            </h3>
+            <p class="mb-3 text-logic-text dark:text-brutal-dark-text">
+              {post.data.description}
+            </p>
+            <p class="text-sm text-logic-text dark:text-brutal-dark-text">
+              <a href={`/writing/${post.slug}`} class="underline text-logic-link dark:text-brutal-dark-text">Read more</a>.
+            </p>
+          </div>
+        );
+      })}
+      </div>
     </div>
-  </section>
+  )}
 
-  <!-- Recent Writing -->
-  <section class="py-16">
-    <h2 class="text-4xl font-black uppercase mb-8">Recent Writing</h2>
-    <ul class="space-y-4">
-      {recentPosts.map(post => (
-        <li class="border-l-4 border-black dark:border-white pl-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition p-4">
-          <a href={`/writing/${post.slug}`} class="flex justify-between items-start">
-            <div>
-              <h3 class="text-xl font-bold">{post.data.title}</h3>
-              <p class="text-sm opacity-70">{post.data.description}</p>
+  <!-- Projects Section (Optional - can be removed if not needed) -->
+  {allProjects.length > 0 && (
+    <div>
+      <h2 class="text-3xl font-bold mb-8 text-logic-link dark:text-brutal-dark-text">Projects</h2>
+      
+      <div class="space-y-8">
+        {allProjects.map(project => {
+          const projectDate = new Date(project.data.date);
+          const isRecent = (Date.now() - projectDate.getTime()) < 90 * 24 * 60 * 60 * 1000;
+          const status = isRecent ? '(Recent)' : '(Available)';
+          
+          return (
+            <div class="mb-8">
+              <h3 class="text-xl font-bold mb-2">
+                <a href={`/projects/${project.slug}`} class="underline text-logic-link dark:text-brutal-dark-text hover:opacity-70">
+                  {project.data.title}
+                </a>
+                <span class="text-sm font-normal text-logic-text dark:text-brutal-dark-text"> ({status})</span>
+              </h3>
+              <p class="mb-3 text-logic-text dark:text-brutal-dark-text">
+                {project.data.description}
+              </p>
+              <p class="text-sm text-logic-text dark:text-brutal-dark-text">
+                {project.data.demoUrl && (
+                  <>
+                    <a href={project.data.demoUrl} target="_blank" rel="noopener" class="underline text-logic-link dark:text-brutal-dark-text">View demo</a>,{' '}
+                  </>
+                )}
+                {project.data.githubUrl && (
+                  <>
+                    <a href={project.data.githubUrl} target="_blank" rel="noopener" class="underline text-logic-link dark:text-brutal-dark-text">view source</a>,{' '}
+                  </>
+                )}
+                <a href={`/projects/${project.slug}`} class="underline text-logic-link dark:text-brutal-dark-text">read more</a>.
+              </p>
             </div>
-            <span class="text-xs uppercase">{new Date(post.data.date).toLocaleDateString()}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
-    <a href="/writing" class="inline-block mt-8 px-6 py-3 border-4 border-black dark:border-white uppercase font-bold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition">
-      All Posts →
-    </a>
-  </section>
+          );
+        })}
+      </div>
+    </div>
+  )}
 
 </BaseLayout>

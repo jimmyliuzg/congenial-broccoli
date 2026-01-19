@@ -17,17 +17,19 @@ const { Content } = await post.render();
 <BaseLayout title={`${post.data.title} — Writing`}>
   
   <article class="max-w-3xl">
-    <h1 class="text-5xl font-black uppercase mb-4 border-b-4 border-black dark:border-white pb-4">
+    <h1 class="text-4xl font-bold mb-4 text-logic-link dark:text-brutal-dark-text">
       {post.data.title}
     </h1>
-    <time class="text-sm opacity-70 uppercase mb-8 block">{new Date(post.data.date).toLocaleDateString()}</time>
+    <time class="text-sm opacity-70 mb-8 block text-logic-text dark:text-brutal-dark-text">
+      {new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+    </time>
     
-    <div class="prose prose-lg dark:prose-invert font-mono max-w-none">
+    <div class="prose prose-lg dark:prose-invert max-w-none text-logic-text dark:text-brutal-dark-text">
       <Content />
     </div>
 
-    <div class="mt-12 pt-8 border-t-4 border-black dark:border-white">
-      <a href="/writing" class="uppercase font-bold hover:underline">← Back to Writing</a>
+    <div class="mt-12 pt-8 border-t border-gray-300 dark:border-gray-700">
+      <a href="/writing" class="text-sm underline text-logic-link dark:text-brutal-dark-text">← Back to Writings</a>
     </div>
   </article>
 

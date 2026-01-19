@@ -4,32 +4,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="About — [YOUR NAME]"> <!-- ← USER INPUT NEEDED -->
   
-  <section class="max-w-4xl">
-    <h1 class="text-5xl font-black uppercase mb-8 border-b-4 border-black dark:border-white pb-4">About</h1>
+  <div class="max-w-3xl">
+    <h1 class="text-4xl font-bold mb-8 text-logic-link dark:text-brutal-dark-text">About</h1>
     
-    <div class="prose prose-lg dark:prose-invert font-mono max-w-none">
+    <div class="space-y-6 text-logic-text dark:text-brutal-dark-text">
       <p>
         [FULL BIO — 3-4 paragraphs about your background, expertise, interests, and career journey] <!-- ← USER INPUT NEEDED -->
       </p>
       
-      <h2 class="text-3xl font-bold uppercase mt-12 mb-4">Skills</h2>
-      <ul class="grid grid-cols-2 gap-4">
-        <li class="border-l-4 border-black dark:border-white pl-4">[SKILL 1]</li> <!-- ← USER INPUT NEEDED -->
-        <li class="border-l-4 border-black dark:border-white pl-4">[SKILL 2]</li>
-        <li class="border-l-4 border-black dark:border-white pl-4">[SKILL 3]</li>
-        <li class="border-l-4 border-black dark:border-white pl-4">[SKILL 4]</li>
+      <h2 class="text-2xl font-bold mt-12 mb-4 text-logic-link dark:text-brutal-dark-text">Skills</h2>
+      <ul class="grid grid-cols-2 gap-3">
+        <li class="pl-2">[SKILL 1]</li> <!-- ← USER INPUT NEEDED -->
+        <li class="pl-2">[SKILL 2]</li>
+        <li class="pl-2">[SKILL 3]</li>
+        <li class="pl-2">[SKILL 4]</li>
       </ul>
 
-      <h2 class="text-3xl font-bold uppercase mt-12 mb-4">Timeline</h2>
-      <ul class="space-y-6">
-        <li class="border-l-4 border-black dark:border-white pl-6">
+      <h2 class="text-2xl font-bold mt-12 mb-4 text-logic-link dark:text-brutal-dark-text">Timeline</h2>
+      <ul class="space-y-4">
+        <li class="pl-2">
           <span class="text-sm opacity-70">[YEAR]</span> <!-- ← USER INPUT NEEDED -->
-          <h3 class="text-xl font-bold">[POSITION/ACHIEVEMENT]</h3>
-          <p class="text-sm">[COMPANY/INSTITUTION]</p>
+          <h3 class="text-lg font-semibold mt-1">[POSITION/ACHIEVEMENT]</h3>
+          <p class="text-sm opacity-80">[COMPANY/INSTITUTION]</p>
         </li>
         <!-- Repeat for each timeline entry -->
       </ul>
     </div>
-  </section>
+  </div>
 
 </BaseLayout>
