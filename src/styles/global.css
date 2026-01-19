@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Link styling - LOGIC style (blue) for light mode, white for dark mode */
+/* Link styling - blue for light mode, white for dark mode */
 @layer base {
   a {
-    @apply text-logic-link dark:text-brutal-dark-text;
+    @apply text-link dark:text-link-dark;
   }
   
   a:hover {

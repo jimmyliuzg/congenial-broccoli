@@ -17,10 +17,10 @@ const { Content } = await project.render();
 <BaseLayout title={`${project.data.title} — Projects`}>
   
   <article class="max-w-4xl">
-    <h1 class="text-4xl font-bold mb-4 text-logic-link dark:text-brutal-dark-text">
+    <h1 class="text-4xl font-bold mb-4 text-link dark:text-link-dark">
       {project.data.title}
     </h1>
-    <p class="text-lg opacity-80 mb-8 text-logic-text dark:text-brutal-dark-text">{project.data.description}</p>
+    <p class="text-lg opacity-80 mb-8 text-light-text dark:text-dark-text">{project.data.description}</p>
     
     {project.data.thumbnail && (
       <div class="mb-8">
@@ -34,22 +34,22 @@ const { Content } = await project.render();
       </div>
     )}
     
-    <div class="prose prose-lg dark:prose-invert max-w-none text-logic-text dark:text-brutal-dark-text">
+    <div class="prose prose-lg dark:prose-invert max-w-none text-light-text dark:text-dark-text">
       <Content />
     </div>
 
     <div class="mt-12 pt-8 border-t border-gray-300 dark:border-gray-700 flex gap-4">
       {project.data.githubUrl && (
-        <a href={project.data.githubUrl} target="_blank" rel="noopener" class="text-sm underline text-logic-link dark:text-brutal-dark-text">
+        <a href={project.data.githubUrl} target="_blank" rel="noopener" class="text-sm underline text-link dark:text-link-dark">
           View on GitHub →
         </a>
       )}
       {project.data.liveUrl && (
-        <a href={project.data.liveUrl} target="_blank" rel="noopener" class="text-sm underline text-logic-link dark:text-brutal-dark-text">
+        <a href={project.data.liveUrl} target="_blank" rel="noopener" class="text-sm underline text-link dark:text-link-dark">
           Live Site →
         </a>
       )}
-      <a href="/projects" class="text-sm underline text-logic-link dark:text-brutal-dark-text">
+      <a href="/projects" class="text-sm underline text-link dark:text-link-dark">
         ← Back to Projects
       </a>
     </div>

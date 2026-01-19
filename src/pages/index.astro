@@ -25,22 +25,22 @@ const decorativeEmoji = '૮・ﻌ・ა♡‧₊˚';
 
   <!-- Introduction -->
   <div class="mb-12 max-w-3xl">
-    <p class="mb-4 text-logic-text dark:text-brutal-dark-text">
-      I am a [YOUR ROLE/TITLE] who [WHAT YOU DO]. Want to know more? <a href="/about" class="underline text-logic-link dark:text-brutal-dark-text">Read more about me</a>.
+    <p class="mb-4 text-light-text dark:text-dark-text">
+      I am a [YOUR ROLE/TITLE] who [WHAT YOU DO]. Want to know more? <a href="/about" class="underline text-link dark:text-link-dark">Read more about me</a>.
     </p>
-    <p class="text-logic-text dark:text-brutal-dark-text">
-      Like my work? <a href="/projects" class="underline text-logic-link dark:text-brutal-dark-text">View my projects</a>.
+    <p class="text-light-text dark:text-dark-text">
+      Like my work? <a href="/projects" class="underline text-link dark:text-link-dark">View my projects</a>.
     </p>
   </div>
 
   <!-- Writings Section -->
   {allPosts.length > 0 && (
     <div class="mb-16">
-      <p class="mb-4 text-sm text-logic-text dark:text-brutal-dark-text">
+      <p class="mb-4 text-sm text-light-text dark:text-dark-text">
         Here's what I have for you so far:
       </p>
       
-      <h2 class="text-3xl font-bold mb-8 text-logic-link dark:text-brutal-dark-text">Writings</h2>
+      <h2 class="text-3xl font-bold mb-8 text-link dark:text-link-dark">Writings</h2>
       
       <div class="space-y-8">
         {allPosts.map(post => {
@@ -51,16 +51,16 @@ const decorativeEmoji = '૮・ﻌ・ა♡‧₊˚';
         return (
           <div class="mb-8">
             <h3 class="text-xl font-bold mb-2">
-              <a href={`/writing/${post.slug}`} class="underline text-logic-link dark:text-brutal-dark-text hover:opacity-70">
+              <a href={`/writing/${post.slug}`} class="underline text-link dark:text-link-dark hover:opacity-70">
                 {post.data.title}
               </a>
-              {status && <span class="text-sm font-normal text-logic-text dark:text-brutal-dark-text"> {status}</span>}
+              {status && <span class="text-sm font-normal text-light-text dark:text-dark-text"> {status}</span>}
             </h3>
-            <p class="mb-3 text-logic-text dark:text-brutal-dark-text">
+            <p class="mb-3 text-light-text dark:text-dark-text">
               {post.data.description}
             </p>
-            <p class="text-sm text-logic-text dark:text-brutal-dark-text">
-              <a href={`/writing/${post.slug}`} class="underline text-logic-link dark:text-brutal-dark-text">Read more</a>.
+            <p class="text-sm text-light-text dark:text-dark-text">
+              <a href={`/writing/${post.slug}`} class="underline text-link dark:text-link-dark">Read more</a>.
             </p>
           </div>
         );
@@ -72,7 +72,7 @@ const decorativeEmoji = '૮・ﻌ・ა♡‧₊˚';
   <!-- Projects Section (Optional - can be removed if not needed) -->
   {allProjects.length > 0 && (
     <div>
-      <h2 class="text-3xl font-bold mb-8 text-logic-link dark:text-brutal-dark-text">Projects</h2>
+      <h2 class="text-3xl font-bold mb-8 text-link dark:text-link-dark">Projects</h2>
       
       <div class="space-y-8">
         {allProjects.map(project => {
@@ -83,26 +83,26 @@ const decorativeEmoji = '૮・ﻌ・ა♡‧₊˚';
           return (
             <div class="mb-8">
               <h3 class="text-xl font-bold mb-2">
-                <a href={`/projects/${project.slug}`} class="underline text-logic-link dark:text-brutal-dark-text hover:opacity-70">
+                <a href={`/projects/${project.slug}`} class="underline text-link dark:text-link-dark hover:opacity-70">
                   {project.data.title}
                 </a>
-                <span class="text-sm font-normal text-logic-text dark:text-brutal-dark-text"> ({status})</span>
+                <span class="text-sm font-normal text-light-text dark:text-dark-text"> ({status})</span>
               </h3>
-              <p class="mb-3 text-logic-text dark:text-brutal-dark-text">
+              <p class="mb-3 text-light-text dark:text-dark-text">
                 {project.data.description}
               </p>
-              <p class="text-sm text-logic-text dark:text-brutal-dark-text">
+              <p class="text-sm text-light-text dark:text-dark-text">
                 {project.data.demoUrl && (
                   <>
-                    <a href={project.data.demoUrl} target="_blank" rel="noopener" class="underline text-logic-link dark:text-brutal-dark-text">View demo</a>,{' '}
+                    <a href={project.data.demoUrl} target="_blank" rel="noopener" class="underline text-link dark:text-link-dark">View demo</a>,{' '}
                   </>
                 )}
                 {project.data.githubUrl && (
                   <>
-                    <a href={project.data.githubUrl} target="_blank" rel="noopener" class="underline text-logic-link dark:text-brutal-dark-text">view source</a>,{' '}
+                    <a href={project.data.githubUrl} target="_blank" rel="noopener" class="underline text-link dark:text-link-dark">view source</a>,{' '}
                   </>
                 )}
-                <a href={`/projects/${project.slug}`} class="underline text-logic-link dark:text-brutal-dark-text">read more</a>.
+                <a href={`/projects/${project.slug}`} class="underline text-link dark:text-link-dark">read more</a>.
               </p>
             </div>
           );

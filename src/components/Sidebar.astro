@@ -30,11 +30,11 @@ const navLinks = [
   <!-- Logo/Name -->
   <div class="mb-8">
     <a href="/" class="block">
-      <h1 class="text-5xl md:text-6xl font-bold text-logic-text dark:text-brutal-dark-text outlined-text">
+      <h1 class="text-5xl md:text-6xl font-bold text-light-text dark:text-dark-text outlined-text">
         [YOUR NAME]
       </h1>
     </a>
-    <p class="text-sm mt-2 text-logic-text dark:text-brutal-dark-text">
+    <p class="text-sm mt-2 text-light-text dark:text-dark-text">
       A portfolio website.
     </p>
   </div>
@@ -48,7 +48,7 @@ const navLinks = [
           <li>
             <a 
               href={link.href} 
-              class={`text-sm hover:underline text-logic-text dark:text-brutal-dark-text ${isActive ? 'underline' : ''}`}
+              class={`text-sm hover:underline text-light-text dark:text-dark-text ${isActive ? 'underline' : ''}`}
             >
               {link.label}
             </a>
@@ -61,8 +61,8 @@ const navLinks = [
   <!-- Latest Post -->
   {latestPost && (
     <div class="mb-6">
-      <p class="text-sm text-logic-text dark:text-brutal-dark-text">
-        Latest post: <a href={`/writing/${latestPost.slug}`} class="underline font-semibold text-logic-link dark:text-brutal-dark-text">{latestPost.data.title}</a>
+      <p class="text-sm text-light-text dark:text-dark-text">
+        Latest post: <a href={`/writing/${latestPost.slug}`} class="underline font-semibold text-link dark:text-link-dark">{latestPost.data.title}</a>
       </p>
     </div>
   )}
@@ -70,15 +70,15 @@ const navLinks = [
   <!-- Latest Project -->
   {latestProject && (
     <div class="mb-6">
-      <p class="text-sm text-logic-text dark:text-brutal-dark-text">
-        Latest project: <a href={`/projects/${latestProject.slug}`} class="underline font-semibold text-logic-link dark:text-brutal-dark-text">{latestProject.data.title}</a>
+      <p class="text-sm text-light-text dark:text-dark-text">
+        Latest project: <a href={`/projects/${latestProject.slug}`} class="underline font-semibold text-link dark:text-link-dark">{latestProject.data.title}</a>
       </p>
     </div>
   )}
 
   <!-- Contact Information -->
   <div class="mb-8">
-    <p class="text-sm mb-2 text-logic-text dark:text-brutal-dark-text">Contact:</p>
+    <p class="text-sm mb-2 text-light-text dark:text-dark-text">Contact:</p>
     <div class="flex gap-4 items-center">
       <a href="mailto:your@email.com" target="_blank" rel="noopener" aria-label="Email" class="text-lg hover:opacity-70">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -101,14 +101,14 @@ const navLinks = [
 
   <!-- Contact Link -->
   <div class="mb-8">
-    <p class="text-sm text-logic-text dark:text-brutal-dark-text">
-      Want to get in touch? <a href="/contact" class="underline font-semibold text-logic-link dark:text-brutal-dark-text">Contact me</a>.
+    <p class="text-sm text-light-text dark:text-dark-text">
+      Want to get in touch? <a href="/contact" class="underline font-semibold text-link dark:text-link-dark">Contact me</a>.
     </p>
   </div>
 
   <!-- Footer Logo (bottom of sidebar) -->
   <div class="mt-auto pt-8 border-t border-gray-300 dark:border-gray-700">
-    <p class="text-xs font-mono text-logic-text dark:text-brutal-dark-text">
+    <p class="text-xs font-mono text-light-text dark:text-dark-text">
       [YOUR NAME]
     </p>
   </div>
@@ -117,7 +117,7 @@ const navLinks = [
   <button 
     data-dark-toggle 
     aria-label="Toggle Dark Mode" 
-    class="mt-4 text-sm underline text-logic-text dark:text-brutal-dark-text hover:opacity-70"
+    class="mt-4 text-sm underline text-light-text dark:text-dark-text hover:opacity-70"
   >
     Toggle Dark Mode
   </button>

@@ -9,20 +9,20 @@ const posts = (await getCollection('writing')).sort((a, b) =>
 
 <BaseLayout title="Writing — [YOUR NAME]"> <!-- ← USER INPUT NEEDED -->
   
-  <h1 class="text-4xl font-bold mb-8 text-logic-link dark:text-brutal-dark-text">Writings</h1>
+  <h1 class="text-4xl font-bold mb-8 text-link dark:text-link-dark">Writings</h1>
   
   <div class="space-y-8">
     {posts.map(post => (
       <div class="mb-8">
         <h2 class="text-xl font-bold mb-2">
-          <a href={`/writing/${post.slug}`} class="underline text-logic-link dark:text-brutal-dark-text hover:opacity-70">
+          <a href={`/writing/${post.slug}`} class="underline text-link dark:text-link-dark hover:opacity-70">
             {post.data.title}
           </a>
         </h2>
-        <p class="mb-3 text-logic-text dark:text-brutal-dark-text">
+        <p class="mb-3 text-light-text dark:text-dark-text">
           {post.data.description}
         </p>
-        <p class="text-sm text-logic-text dark:text-brutal-dark-text">
+        <p class="text-sm text-light-text dark:text-dark-text">
           <time>{new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time> — <a href={`/writing/${post.slug}`} class="underline">read more</a>.
         </p>
       </div>

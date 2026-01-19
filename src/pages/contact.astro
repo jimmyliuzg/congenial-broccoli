@@ -5,20 +5,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout title="Contact — [YOUR NAME]"> <!-- ← USER INPUT NEEDED -->
   
   <div class="max-w-2xl">
-    <h1 class="text-4xl font-bold mb-8 text-logic-link dark:text-brutal-dark-text">Contact</h1>
+    <h1 class="text-4xl font-bold mb-8 text-link dark:text-link-dark">Contact</h1>
     
-    <p class="mb-8 text-logic-text dark:text-brutal-dark-text">
+    <p class="mb-8 text-light-text dark:text-dark-text">
       [CONTACT INTRO — e.g., "Let's connect! Feel free to reach out for collaborations, opportunities, or just to say hi."] <!-- ← USER INPUT NEEDED -->
     </p>
 
     <div class="space-y-4 mb-12">
-      <p class="text-logic-text dark:text-brutal-dark-text">
+      <p class="text-light-text dark:text-dark-text">
         <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" class="underline">LinkedIn</a> <!-- ← USER INPUT NEEDED -->
       </p>
-      <p class="text-logic-text dark:text-brutal-dark-text">
+      <p class="text-light-text dark:text-dark-text">
         <a href="[LINK TO RESUME PDF]" target="_blank" class="underline">Download Resume</a> <!-- ← USER INPUT NEEDED -->
       </p>
-      <p class="text-logic-text dark:text-brutal-dark-text">
+      <p class="text-light-text dark:text-dark-text">
         <a href="mailto:your@email.com" class="underline">Email</a> <!-- ← USER INPUT NEEDED -->
       </p>
     </div>
@@ -26,18 +26,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Optional: Simple contact form (requires backend or form service like Formspree) -->
     <form action="https://formspree.io/f/[YOUR_FORM_ID]" method="POST" class="space-y-6"> <!-- ← USER INPUT NEEDED (sign up at formspree.io) -->
       <div>
-        <label for="name" class="block text-sm font-semibold mb-2 text-logic-text dark:text-brutal-dark-text">Name</label>
-        <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-400 dark:border-gray-600 bg-transparent text-logic-text dark:text-brutal-dark-text focus:outline-none focus:border-logic-link dark:focus:border-brutal-dark-text" />
+        <label for="name" class="block text-sm font-semibold mb-2 text-light-text dark:text-dark-text">Name</label>
+        <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-400 dark:border-gray-600 bg-transparent text-light-text dark:text-dark-text focus:outline-none focus:border-link dark:focus:border-link-dark" />
       </div>
       <div>
-        <label for="email" class="block text-sm font-semibold mb-2 text-logic-text dark:text-brutal-dark-text">Email</label>
-        <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-400 dark:border-gray-600 bg-transparent text-logic-text dark:text-brutal-dark-text focus:outline-none focus:border-logic-link dark:focus:border-brutal-dark-text" />
+        <label for="email" class="block text-sm font-semibold mb-2 text-light-text dark:text-dark-text">Email</label>
+        <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-400 dark:border-gray-600 bg-transparent text-light-text dark:text-dark-text focus:outline-none focus:border-link dark:focus:border-link-dark" />
       </div>
       <div>
-        <label for="message" class="block text-sm font-semibold mb-2 text-logic-text dark:text-brutal-dark-text">Message</label>
-        <textarea id="message" name="message" rows="6" required class="w-full p-3 border border-gray-400 dark:border-gray-600 bg-transparent text-logic-text dark:text-brutal-dark-text focus:outline-none focus:border-logic-link dark:focus:border-brutal-dark-text"></textarea>
+        <label for="message" class="block text-sm font-semibold mb-2 text-light-text dark:text-dark-text">Message</label>
+        <textarea id="message" name="message" rows="6" required class="w-full p-3 border border-gray-400 dark:border-gray-600 bg-transparent text-light-text dark:text-dark-text focus:outline-none focus:border-link dark:focus:border-link-dark"></textarea>
       </div>
-      <button type="submit" class="px-6 py-3 bg-logic-link dark:bg-brutal-dark-text text-white dark:text-brutal-dark-bg font-semibold hover:opacity-80 transition">
+      <button type="submit" class="px-6 py-3 bg-link dark:bg-link-dark text-white dark:text-dark-bg font-semibold hover:opacity-80 transition">
         Send Message
       </button>
     </form>

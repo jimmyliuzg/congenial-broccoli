@@ -11,18 +11,20 @@ module.exports = {
         sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
       },
       colors: {
-        // LOGIC-style light mode colors
-        logic: {
+        // Light mode colors (white background, black text)
+        light: {
           bg: '#FFFFFF',
           text: '#000000',
-          link: '#0066CC', // Blue for links
         },
-        // Brutalist dark mode (monochrome black/white)
-        brutal: {
-          bg: '#FFFFFF',
-          text: '#000000',
-          'dark-bg': '#000000',
-          'dark-text': '#FFFFFF',
+        // Dark mode colors (black background, white text)
+        dark: {
+          bg: '#000000',
+          text: '#FFFFFF',
+        },
+        // Link color (blue for light mode, white for dark mode)
+        link: {
+          DEFAULT: '#0066CC', // Blue for light mode
+          dark: '#FFFFFF',    // White for dark mode
         },
       },
     },
