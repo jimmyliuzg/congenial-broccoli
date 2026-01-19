@@ -10,7 +10,7 @@ This website was built as an experiment in AI-assisted development. The goal was
 - Type-Safe: Content schemas validated with Zod
 
 ## 📂 Project Structure
-
+'''
 src/
 ├── components/       # Reusable UI components (Nav, Footer)
 ├── content/          # Markdown content collections
@@ -23,6 +23,7 @@ src/
 │   ├── projects/[slug].astro
 │   └── writing/[slug].astro
 └── styles/          # Global styles and Tailwind config
+'''
 
 ## 🎨 Customization
 The site's visual design is controlled through tailwind.config.cjs. Key customization points:
