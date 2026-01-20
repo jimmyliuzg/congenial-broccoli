@@ -1,18 +1,18 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
 // FEATURE FLAGS - Toggle sections on/off
-const showWritings = false;  // Set to true when ready to show
-const showProjects = false;  // Set to true when ready to show
+const showWritings = false; // Set to true when ready to show
+const showProjects = false; // Set to true when ready to show
 
 // Get all posts and projects, sorted by date (newest first)
-const allPosts = (await getCollection('writing')).sort((a, b) => 
-  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+const allPosts = (await getCollection("writing")).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
 );
 
-const allProjects = (await getCollection('projects')).sort((a, b) => 
-  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+const allProjects = (await getCollection("projects")).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
 );
 
 // Get latest project for "Currently working on"
@@ -20,11 +20,10 @@ const latestProject = allProjects.length > 0 ? allProjects[0] : null;
 
 // Decorative emoticon - EASY TO CHANGE: Just replace the text below
 // This appears at the top of the main content area
-const decorativeEmoji = '૮・ﻌ・ა♡‧₊˚';
+const decorativeEmoji = "૮・ﻌ・ა♡‧₊˚";
 ---
 
-<BaseLayout title="Jimmy Liu — Portfolio & Resume"> 
-  
+<BaseLayout title="Jimmy Liu — Portfolio & Resume">
   <!-- Decorative Element -->
   <div class="mb-6 text-2xl">
     {decorativeEmoji}
@@ -33,91 +32,167 @@ const decorativeEmoji = '૮・ﻌ・ა♡‧₊˚';
   <!-- Introduction -->
   <div class="mb-12 max-w-3xl">
     <p class="mb-4 text-light-text dark:text-dark-text">
-      Hey! I'm Jimmy Liu, a purpose-driven Technical Program Manager passionate about building technology that serves people.
+      Hey! I'm Jimmy Liu, a purpose-driven Technical Program Manager passionate
+      about building technology that serves people.
     </p>
 
     <p class="mb-4 text-light-text dark:text-dark-text">
-      Currently, I orchestrate global data operations at <a href="https://www.nvidia.com/en-us/solutions/autonomous-vehicles/" target="_blank" rel="noopener" class="font-bold text-blue-600 hover:text-blue-800 underline dark:text-blue-400 dark:hover:text-blue-300">Nvidia</a>—managing delivery pipelines that have enabled NCAP 5-star safety ratings and L2++ autonomy. Previously at <a href="https://www.magicleap.com" target="_blank" rel="noopener" class="font-bold text-blue-600 hover:text-blue-800 underline dark:text-blue-400 dark:hover:text-blue-300">Magic Leap</a> and <a href="https://www.aboutamazon.com/what-we-do/devices-services" target="_blank" rel="noopener" class="font-bold text-blue-600 hover:text-blue-800 underline dark:text-blue-400 dark:hover:text-blue-300">Amazon</a>. <a href="/about" class="font-bold text-blue-600 hover:text-blue-800 underline dark:text-blue-400 dark:hover:text-blue-300">Learn more about my work.</a>
+      Currently, I orchestrate global data operations at <a
+        href="https://www.nvidia.com/en-us/solutions/autonomous-vehicles/"
+        target="_blank"
+        rel="noopener"
+        class="font-bold text-blue-600 hover:text-blue-800 underline dark:text-blue-400 dark:hover:text-blue-300"
+        >NVIDIA</a
+      >—managing delivery pipelines that power NCAP 5-star safety ratings and
+      L2++ autonomy. Previously at <a
+        href="https://www.magicleap.com"
+        target="_blank"
+        rel="noopener"
+        class="font-bold text-blue-600 hover:text-blue-800 underline dark:text-blue-400 dark:hover:text-blue-300"
+        >Magic Leap</a
+      > and <a
+        href="https://www.aboutamazon.com/what-we-do/devices-services"
+        target="_blank"
+        rel="noopener"
+        class="font-bold text-blue-600 hover:text-blue-800 underline dark:text-blue-400 dark:hover:text-blue-300"
+        >Amazon</a
+      >. <a
+        href="/about"
+        class="font-bold text-blue-600 hover:text-blue-800 underline dark:text-blue-400 dark:hover:text-blue-300"
+        >Learn more about my work.</a
+      >
     </p>
 
     <p class="mb-4 text-light-text dark:text-dark-text">
-      This site is where I experiment and share projects beyond my day-to-day work—including vibe-coded websites ;)
+      This site is where I share my professional journey, technical projects,
+      and thoughts on making data-driven decisions at scale.
     </p>
   </div>
 
   <!-- Writings Section -->
   <div class="mb-16">
-    <h2 class="text-3xl font-bold mb-8 text-link dark:text-link-dark">Writing (Work in Progress)</h2>
+    <h2 class="text-3xl font-bold mb-8 text-link dark:text-link-dark">
+      Writing (Work in Progress)
+    </h2>
   </div>
 
-  {showWritings && allPosts.length > 0 && (
-    <div class="mb-16">
-      <div class="space-y-8">
-        {allPosts.map(post => {
-        const postDate = new Date(post.data.date);
-        const isRecent = (Date.now() - postDate.getTime()) < 90 * 24 * 60 * 60 * 1000; // Within last 90 days
-        const status = isRecent ? '(Recent)' : '';
-        
-        return (
-          <div class="mb-8">
-            <h3 class="text-xl font-bold mb-2">
-              <a href={`/writing/${post.slug}`} class="underline text-link dark:text-link-dark hover:opacity-70">
-                {post.data.title}
-              </a>
-              {status && <span class="text-sm font-normal text-light-text dark:text-dark-text"> {status}</span>}
-            </h3>
-            <p class="mb-3 text-light-text dark:text-dark-text">
-              {post.data.description}
-            </p>
-            <p class="text-sm text-light-text dark:text-dark-text">
-              <a href={`/writing/${post.slug}`} class="underline text-link dark:text-link-dark">Read more</a>.
-            </p>
-          </div>
-        );
-      })}
-      </div>
-    </div>
-  )}
+  {
+    showWritings && allPosts.length > 0 && (
+      <div class="mb-16">
+        <div class="space-y-8">
+          {allPosts.map((post) => {
+            const postDate = new Date(post.data.date);
+            const isRecent =
+              Date.now() - postDate.getTime() < 90 * 24 * 60 * 60 * 1000; // Within last 90 days
+            const status = isRecent ? "(Recent)" : "";
 
-  {showProjects && allProjects.length > 0 && (
-    <div>
-      <h2 class="text-3xl font-bold mb-8 text-link dark:text-link-dark">Projects</h2>
-      
-      <div class="space-y-8">
-        {allProjects.map(project => {
-          const projectDate = new Date(project.data.date);
-          const isRecent = (Date.now() - projectDate.getTime()) < 90 * 24 * 60 * 60 * 1000;
-          const status = isRecent ? '(Recent)' : '(Available)';
-          
-          return (
-            <div class="mb-8">
-              <h3 class="text-xl font-bold mb-2">
-                <a href={`/projects/${project.slug}`} class="underline text-link dark:text-link-dark hover:opacity-70">
-                  {project.data.title}
-                </a>
-                <span class="text-sm font-normal text-light-text dark:text-dark-text"> ({status})</span>
-              </h3>
-              <p class="mb-3 text-light-text dark:text-dark-text">
-                {project.data.description}
-              </p>
-              <p class="text-sm text-light-text dark:text-dark-text">
-                {project.data.demoUrl && (
-                  <>
-                    <a href={project.data.demoUrl} target="_blank" rel="noopener" class="underline text-link dark:text-link-dark">View demo</a>,{' '}
-                  </>
-                )}
-                {project.data.githubUrl && (
-                  <>
-                    <a href={project.data.githubUrl} target="_blank" rel="noopener" class="underline text-link dark:text-link-dark">view source</a>,{' '}
-                  </>
-                )}
-                <a href={`/projects/${project.slug}`} class="underline text-link dark:text-link-dark">read more</a>.
-              </p>
-            </div>
-          );
-        })}
+            return (
+              <div class="mb-8">
+                <h3 class="text-xl font-bold mb-2">
+                  <a
+                    href={`/writing/${post.slug}`}
+                    class="underline text-link dark:text-link-dark hover:opacity-70"
+                  >
+                    {post.data.title}
+                  </a>
+                  {status && (
+                    <span class="text-sm font-normal text-light-text dark:text-dark-text">
+                      {" "}
+                      {status}
+                    </span>
+                  )}
+                </h3>
+                <p class="mb-3 text-light-text dark:text-dark-text">
+                  {post.data.description}
+                </p>
+                <p class="text-sm text-light-text dark:text-dark-text">
+                  <a
+                    href={`/writing/${post.slug}`}
+                    class="underline text-link dark:text-link-dark"
+                  >
+                    Read more
+                  </a>
+                  .
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
-  )}
+    )
+  }
 
+  {
+    showProjects && allProjects.length > 0 && (
+      <div>
+        <h2 class="text-3xl font-bold mb-8 text-link dark:text-link-dark">
+          Projects
+        </h2>
+
+        <div class="space-y-8">
+          {allProjects.map((project) => {
+            const projectDate = new Date(project.data.date);
+            const isRecent =
+              Date.now() - projectDate.getTime() < 90 * 24 * 60 * 60 * 1000;
+            const status = isRecent ? "(Recent)" : "(Available)";
+
+            return (
+              <div class="mb-8">
+                <h3 class="text-xl font-bold mb-2">
+                  <a
+                    href={`/projects/${project.slug}`}
+                    class="underline text-link dark:text-link-dark hover:opacity-70"
+                  >
+                    {project.data.title}
+                  </a>
+                  <span class="text-sm font-normal text-light-text dark:text-dark-text">
+                    {" "}
+                    ({status})
+                  </span>
+                </h3>
+                <p class="mb-3 text-light-text dark:text-dark-text">
+                  {project.data.description}
+                </p>
+                <p class="text-sm text-light-text dark:text-dark-text">
+                  {project.data.demoUrl && (
+                    <>
+                      <a
+                        href={project.data.demoUrl}
+                        target="_blank"
+                        rel="noopener"
+                        class="underline text-link dark:text-link-dark"
+                      >
+                        View demo
+                      </a>
+                      ,{" "}
+                    </>
+                  )}
+                  {project.data.githubUrl && (
+                    <>
+                      <a
+                        href={project.data.githubUrl}
+                        target="_blank"
+                        rel="noopener"
+                        class="underline text-link dark:text-link-dark"
+                      >
+                        view source
+                      </a>
+                      ,{" "}
+                    </>
+                  )}
+                  <a
+                    href={`/projects/${project.slug}`}
+                    class="underline text-link dark:text-link-dark"
+                  >
+                    read more
+                  </a>
+                  .
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    )
+  }
 </BaseLayout>
