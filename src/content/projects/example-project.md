@@ -4,7 +4,7 @@ description: "Personal website built with Astro, Tailwind CSS, and Google Antigr
 date: 2026-01-15
 thumbnail: "/assets/project-thumb.png"
 tags: ["JavaScript", "D3.js", "Data Viz"]
-demoUrl: "congenial-broccoli-3im.pages.dev"
+demoUrl: "https://congenial-broccoli-3im.pages.dev"
 githubUrl: "https://github.com/jimmyliuzg/congenial-broccoli"
 ---
 
