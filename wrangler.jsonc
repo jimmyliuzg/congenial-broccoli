@@ -1,5 +1,5 @@
 {
     "$schema": "node_modules/wrangler/config-schema.json",
-    "name": "portfolio-astro",
+    "name": "congenial-broccoli",
     "pages_build_output_dir": "./dist"
 }
