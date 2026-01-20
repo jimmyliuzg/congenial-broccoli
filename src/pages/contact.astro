@@ -23,30 +23,46 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         name="access_key"
         value="4bbacda3-ebdb-40f8-aa58-73e5fe1a96fb"
       />
-      <div>
-        <label
-          for="name"
-          class="block text-sm font-semibold mb-2 text-light-text dark:text-dark-text"
-          >Name</label
-        >
-        <input
-          type="text"
-          id="name"
-          name="name"
-          required
-          class="w-full p-3 border border-gray-400 dark:border-gray-600 bg-transparent text-light-text dark:text-dark-text focus:outline-none focus:border-link dark:focus:border-link-dark"
-        />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label
+            for="name"
+            class="block text-sm font-semibold mb-2 text-light-text dark:text-dark-text"
+            >Name</label
+          >
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="w-full p-3 border border-gray-400 dark:border-gray-600 bg-transparent text-light-text dark:text-dark-text focus:outline-none focus:border-link dark:focus:border-link-dark"
+          />
+        </div>
+        <div>
+          <label
+            for="email"
+            class="block text-sm font-semibold mb-2 text-light-text dark:text-dark-text"
+            >Email</label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full p-3 border border-gray-400 dark:border-gray-600 bg-transparent text-light-text dark:text-dark-text focus:outline-none focus:border-link dark:focus:border-link-dark"
+          />
+        </div>
       </div>
       <div>
         <label
-          for="email"
+          for="subject"
           class="block text-sm font-semibold mb-2 text-light-text dark:text-dark-text"
-          >Email</label
+          >Subject</label
         >
         <input
-          type="email"
-          id="email"
-          name="email"
+          type="text"
+          id="subject"
+          name="subject"
           required
           class="w-full p-3 border border-gray-400 dark:border-gray-600 bg-transparent text-light-text dark:text-dark-text focus:outline-none focus:border-link dark:focus:border-link-dark"
         />
