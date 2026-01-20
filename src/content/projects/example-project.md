@@ -1,11 +1,11 @@
 ---
-title: "Placeholder Project"
-description: "A brutalist D3.js experiment exploring climate data"
+title: "Personal Website"
+description: "Personal website built with Astro, Tailwind CSS, and Google Antigravity"
 date: 2026-01-15
 thumbnail: "/assets/project-thumb.png"
 tags: ["JavaScript", "D3.js", "Data Viz"]
-demoUrl: "TBD"
-githubUrl: "TBD"
+demoUrl: "congenial-broccoli-3im.pages.dev"
+githubUrl: "https://github.com/jimmyliuzg/congenial-broccoli"
 ---
 
 ## Overview
