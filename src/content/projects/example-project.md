@@ -1,11 +1,11 @@
 ---
-title: "Interactive Data Visualizer"
+title: "Placeholder Project"
 description: "A brutalist D3.js experiment exploring climate data"
 date: 2026-01-15
 thumbnail: "/assets/project-thumb.png"
 tags: ["JavaScript", "D3.js", "Data Viz"]
-demoUrl: "https://yourdomain.com/demos/viz"
-githubUrl: "https://github.com/yourusername/project"
+demoUrl: "TBD"
+githubUrl: "TBD"
 ---
 
 ## Overview
