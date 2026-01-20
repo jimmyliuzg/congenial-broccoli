@@ -1,40 +1,38 @@
-# Jimmy's Portfolio Website
-This website was built as an experiment in AI-assisted development. The goal was to explore how AI tools can accelerate the creation of modern, production-ready web applications while maintaining design quality and code standards.
+# Congenial Broccoli - Portfolio Site
 
-## ✨ Features
-- Brutalist Design: Bold borders, high contrast, monospace typography
-- Content Collections: Markdown-based blog posts and project showcases
-- Dark Mode: Seamless theme switching with persistent user preference
-- Responsive: Mobile-first design that works on all devices
-- Fast: Built with Astro for speed
-- Type-Safe: Content schemas validated with Zod
+A personal portfolio and blog built with [Astro](https://astro.build), [React](https://reactjs.org), and [Tailwind CSS](https://tailwindcss.com). Created with [Google Antigravity](https://antigravity.google). The goal is to explore how AI tools can accelerate the creation of modern, production-ready web applications while maintaining design quality and code standards.
 
-## 📂 Project Structure
-```
-src/
-├── components/       # Reusable UI components (Nav, Footer)
-├── content/          # Markdown content collections
-│   ├── projects/    # Project case studies
-│   └── writing/     # Blog posts
-├── layouts/         # Page layouts and templates
-├── pages/           # Route-based pages
-│   ├── index.astro
-│   ├── about.astro
-│   ├── projects/[slug].astro
-│   └── writing/[slug].astro
-└── styles/          # Global styles and Tailwind config
-```
+## 🚀 Features
 
-## 🎨 Customization
-The site's visual design is controlled through tailwind.config.cjs. Key customization points:
-- Colors: Edit the color palette for light/dark modes
-- Fonts: Modify fontFamily settings (currently using Courier Prime and Inter)
-- Content: Add markdown files to src/content/projects/ or src/content/writing/
-- For detailed customization instructions, see GUIDE.md.
+- **Performance**: Static site generation (SSG) for blazing fast load times.
+- **Styling**: Brutalist design aesthetic using Tailwind CSS.
+- **Content**: Markdown-based content collections for Projects and Writing.
+- **Deployment**: Optimized for Cloudflare Pages.
 
 ## 🛠️ Tech Stack
-- Astro - Static site framework
-- Tailwind CSS - Utility-first CSS framework
-- TypeScript - Type safety
-- Zod - Content schema validation
-- Claude Models through Cursor/Perplexity
+
+- **Framework**: Astro 5
+- **UI Integrations**: React 18
+- **Styling**: Tailwind CSS
+- **Adapter**: @astrojs/cloudflare
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command | Action |
+| :--- | :--- |
+| `npm install` | Installs dependencies |
+| `npm run dev` | Starts local dev server at `localhost:4321` |
+| `npm run build` | Build your production site to `./dist/` |
+| `npm run preview` | Preview your build locally, before deploying |
+
+## 📦 Deployment
+
+This project is configured for **Cloudflare Pages**.
+
+1. Connect your repository to Cloudflare Pages.
+2. Use the following build settings:
+   - **Framework Preset**: Astro
+   - **Build Command**: `npm run build`
+   - **Build Output Directory**: `dist`
