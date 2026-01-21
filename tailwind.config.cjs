@@ -26,6 +26,14 @@ module.exports = {
           DEFAULT: '#0066CC', // Blue for light mode
           dark: '#FFFFFF',    // White for dark mode
         },
+        // Racefinder Maximalist Palette (Updated)
+        racefinder: {
+          cyan: '#13F0FF',
+          yellow: '#F0FF13',
+          magenta: '#FF13F0',
+          white: '#FFFFFF',
+          black: '#000000',
+        },
       },
     },
   },
