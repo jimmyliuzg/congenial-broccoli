@@ -51,22 +51,30 @@
                 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-[1.8] md:leading-[2]"
             >
                 <!-- Part 1: Always visible -->
-                <span class="text-white/40">I am a </span>
-                <select
-                    id="experience"
-                    name="experienceLevel"
-                    required
-                    class="appearance-none bg-transparent border-b-2 border-[#FF13F0] text-[#FF13F0] px-2 cursor-pointer hover:border-white hover:text-white transition-colors focus:outline-none"
-                >
-                    <option value="" disabled selected class="bg-black"
-                        >_____</option
+                <span class="text-white/40"
+                    >I am <span id="article-text">a</span>
+                </span>
+                <span class="select-wrapper">
+                    <select
+                        id="experience"
+                        name="experienceLevel"
+                        required
+                        class="select-field placeholder-active appearance-none bg-transparent border-b-2 border-[#FF13F0] text-[#FF13F0] px-2 cursor-pointer hover:opacity-100 hover:border-white hover:text-white transition-all focus:outline-none min-w-[140px]"
                     >
-                    <option value="Beginner" class="bg-black">beginner</option>
-                    <option value="Intermediate" class="bg-black"
-                        >intermediate</option
-                    >
-                    <option value="Advanced" class="bg-black">advanced</option>
-                </select>
+                        <option value="" disabled selected class="bg-black"
+                            >beginner</option
+                        >
+                        <option value="Beginner" class="bg-black"
+                            >beginner</option
+                        >
+                        <option value="Intermediate" class="bg-black"
+                            >intermediate</option
+                        >
+                        <option value="Advanced" class="bg-black"
+                            >advanced</option
+                        >
+                    </select>
+                </span>
                 <span class="text-white/40"> runner </span>
 
                 <!-- Part 2: Appears after experience selected -->
@@ -75,24 +83,26 @@
                     class="inline opacity-0 transition-opacity duration-500"
                 >
                     <span class="text-white/40">looking to run a </span>
-                    <select
-                        id="distance"
-                        name="distance"
-                        required
-                        class="appearance-none bg-transparent border-b-2 border-[#F0FF13] text-[#F0FF13] px-2 cursor-pointer hover:border-white hover:text-white transition-colors focus:outline-none"
-                    >
-                        <option value="" disabled selected class="bg-black"
-                            >_____</option
+                    <span class="select-wrapper">
+                        <select
+                            id="distance"
+                            name="distance"
+                            required
+                            class="select-field placeholder-active appearance-none bg-transparent border-b-2 border-[#F0FF13] text-[#F0FF13] px-2 cursor-pointer hover:opacity-100 hover:border-white hover:text-white transition-all focus:outline-none min-w-[140px]"
                         >
-                        <option value="5K" class="bg-black">5K</option>
-                        <option value="10K" class="bg-black">10K</option>
-                        <option value="Half Marathon" class="bg-black"
-                            >half marathon</option
-                        >
-                        <option value="Marathon" class="bg-black"
-                            >marathon</option
-                        >
-                    </select>
+                            <option value="" disabled selected class="bg-black"
+                                >5K</option
+                            >
+                            <option value="5K" class="bg-black">5K</option>
+                            <option value="10K" class="bg-black">10K</option>
+                            <option value="Half Marathon" class="bg-black"
+                                >half marathon</option
+                            >
+                            <option value="Marathon" class="bg-black"
+                                >marathon</option
+                            >
+                        </select>
+                    </span>
                 </span>
 
                 <!-- Part 3: "in [location]" - appears after distance -->
@@ -117,18 +127,21 @@
                     class="inline opacity-0 transition-opacity duration-500"
                 >
                     <span class="text-white/40"> on </span>
-                    <select
-                        id="type"
-                        name="type"
-                        required
-                        class="appearance-none bg-transparent border-b-2 border-[#13F0FF] text-[#13F0FF] px-2 cursor-pointer hover:border-white hover:text-white transition-colors focus:outline-none"
-                    >
-                        <option value="" disabled selected class="bg-black"
-                            >_____</option
+                    <span class="select-wrapper">
+                        <select
+                            id="type"
+                            name="type"
+                            required
+                            class="select-field placeholder-active appearance-none bg-transparent border-b-2 border-[#13F0FF] text-[#13F0FF] px-2 cursor-pointer hover:opacity-100 hover:border-white hover:text-white transition-all focus:outline-none min-w-[100px]"
                         >
-                        <option value="Road" class="bg-black">road</option>
-                        <option value="Trail" class="bg-black">trail</option>
-                    </select>
+                            <option value="" disabled selected class="bg-black"
+                                >road</option
+                            >
+                            <option value="Road" class="bg-black">road</option>
+                            <option value="Trail" class="bg-black">trail</option
+                            >
+                        </select>
+                    </span>
                 </span>
 
                 <!-- Part 5: Timeline + Button - appears after type selected -->
@@ -283,6 +296,17 @@
         const target = e.target as HTMLSelectElement;
         if (target.value) {
             showStep("step-2", 1);
+            target.classList.remove("placeholder-active");
+            target.classList.add("value-selected");
+
+            // Update article: "a" for beginner, "an" for intermediate/advanced
+            const articleEl = document.getElementById("article-text");
+            if (articleEl) {
+                const needsAn = ["Intermediate", "Advanced"].includes(
+                    target.value,
+                );
+                articleEl.textContent = needsAn ? "an" : "a";
+            }
         }
     });
 
@@ -291,6 +315,8 @@
         const target = e.target as HTMLSelectElement;
         if (target.value) {
             showStep("step-3", 2);
+            target.classList.remove("placeholder-active");
+            target.classList.add("value-selected");
         }
     });
 
@@ -307,6 +333,8 @@
         const target = e.target as HTMLSelectElement;
         if (target.value) {
             showStep("step-5", 4);
+            target.classList.remove("placeholder-active");
+            target.classList.add("value-selected");
         }
     });
 
@@ -318,7 +346,126 @@
         }
     });
 
-    // Cycling animations removed for cleaner aesthetic
+    // === Slow Cycling Placeholder Animation ===
+    // Cycles through options every 2.5 seconds until user selects
+    const cycleConfig: Record<string, { selectId: string; options: string[] }> =
+        {
+            experience: {
+                selectId: "experience",
+                options: ["beginner", "intermediate", "advanced"],
+            },
+            distance: {
+                selectId: "distance",
+                options: ["5K", "10K", "half marathon", "marathon"],
+            },
+            type: { selectId: "type", options: ["road", "trail"] },
+        };
+
+    Object.values(cycleConfig).forEach(({ selectId, options }) => {
+        const selectEl = document.getElementById(selectId) as HTMLSelectElement;
+        if (!selectEl) return;
+
+        const placeholderOption = selectEl.options[0];
+        let idx = 0;
+        let intervalId: number;
+        let isActive = true;
+        let isPaused = false;
+
+        // Store original placeholder text for when dropdown opens
+        const openPlaceholders: Record<string, string> = {
+            experience: "choose level",
+            distance: "choose distance",
+            type: "choose type",
+        };
+
+        // Breathing animation: fade out -> change text -> fade in
+        function breatheAndCycle() {
+            if (!isActive || isPaused || selectEl.value) return;
+
+            // Phase 1: Breathe out (fade out)
+            selectEl.classList.add("breathing-out");
+
+            // Phase 2: Change text at peak of exhale (after 300ms)
+            setTimeout(() => {
+                if (!isActive || isPaused || selectEl.value) return;
+                idx = (idx + 1) % options.length;
+                placeholderOption.text = options[idx];
+
+                // Update article for experience dropdown during cycling
+                if (selectId === "experience") {
+                    const articleEl = document.getElementById("article-text");
+                    if (articleEl) {
+                        const needsAn = ["intermediate", "advanced"].includes(
+                            options[idx],
+                        );
+                        articleEl.textContent = needsAn ? "an" : "a";
+                    }
+                }
+
+                // Phase 3: Breathe in (fade back in)
+                selectEl.classList.remove("breathing-out");
+                selectEl.classList.add("breathing-in");
+
+                // Reset for next cycle
+                setTimeout(() => {
+                    selectEl.classList.remove("breathing-in");
+                }, 300);
+            }, 300);
+        }
+
+        function pauseCycling() {
+            isPaused = true;
+            selectEl.classList.remove("breathing-out", "breathing-in");
+            // Show distinct instruction text when dropdown is open
+            placeholderOption.text = openPlaceholders[selectId] || "choose...";
+            // Add focused state styling
+            selectEl.classList.add("dropdown-open");
+        }
+
+        function resumeCycling() {
+            if (selectEl.value) return; // Don't resume if value selected
+            isPaused = false;
+            selectEl.classList.remove("dropdown-open");
+            // Reset to current cycle position
+            placeholderOption.text = options[idx];
+        }
+
+        function stopCycling() {
+            isActive = false;
+            isPaused = false;
+            clearInterval(intervalId);
+            selectEl.classList.remove(
+                "breathing-out",
+                "breathing-in",
+                "dropdown-open",
+            );
+            if (selectEl.value) {
+                placeholderOption.style.display = "none";
+            }
+        }
+
+        // Start with first option
+        placeholderOption.text = options[0];
+
+        // Cycle every 1.8 seconds
+        intervalId = setInterval(breatheAndCycle, 1800) as unknown as number;
+
+        // Pause cycling when dropdown opens (focus/click)
+        selectEl.addEventListener("focus", pauseCycling);
+        selectEl.addEventListener("mousedown", pauseCycling);
+
+        // Resume cycling when dropdown closes without selection
+        selectEl.addEventListener("blur", () => {
+            if (selectEl.value) {
+                stopCycling();
+            } else {
+                resumeCycling();
+            }
+        });
+
+        // Stop cycling permanently when value selected
+        selectEl.addEventListener("change", stopCycling);
+    });
 
     // === Form Submission ===
     const form = document.getElementById("find-race-form");
@@ -588,5 +735,55 @@
     input[type="number"] {
         -moz-appearance: textfield;
     }
-    /* Removed cycling text animations */
+    /* Select field styling */
+    .select-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Placeholder state: slightly faded text only */
+    .select-field.placeholder-active {
+        color: inherit;
+        opacity: 0.65;
+        transition: opacity 0.3s ease;
+    }
+
+    .select-field.placeholder-active:hover {
+        opacity: 1;
+    }
+
+    /* Breathing animation phases - text only, not underline */
+    .select-field.breathing-out {
+        opacity: 0.3 !important;
+        transition: opacity 0.3s ease-out;
+    }
+
+    .select-field.breathing-in {
+        opacity: 0.7;
+        transition: opacity 0.3s ease-in;
+    }
+
+    /* When value is selected: full opacity */
+    .select-field.value-selected {
+        opacity: 1 !important;
+    }
+
+    /* Dropdown open state: full visibility, white border */
+    .select-field.dropdown-open {
+        opacity: 1 !important;
+        border-color: white !important;
+        color: white !important;
+    }
+
+    /* Focus ring for accessibility */
+    .select-field:focus {
+        outline: none;
+        opacity: 1;
+    }
+
+    /* Hover state enhancement */
+    .select-field:hover:not(.value-selected) {
+        opacity: 0.9;
+        cursor: pointer;
+    }
 </style>
