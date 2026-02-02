@@ -21,10 +21,15 @@ module.exports = {
           bg: '#000000',
           text: '#FFFFFF',
         },
-        // Link color (blue for light mode, white for dark mode)
+        // Accent color - electric blue (works in both modes)
+        accent: {
+          DEFAULT: '#0066FF', // For light mode
+          dark: '#3D8EFF',    // Brighter for dark mode
+        },
+        // Link color (kept for compatibility)
         link: {
-          DEFAULT: '#0066CC', // Blue for light mode
-          dark: '#FFFFFF',    // White for dark mode
+          DEFAULT: '#0066FF', // Blue for light mode  
+          dark: '#3D8EFF',    // Brighter blue for dark mode
         },
         // Racefinder Maximalist Palette (Updated)
         racefinder: {

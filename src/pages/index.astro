@@ -1,10 +1,6 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import SinglePageLayout from "../layouts/SinglePageLayout.astro";
 import { getCollection } from "astro:content";
-
-// FEATURE FLAGS - Toggle sections on/off
-const showWritings = false; // Set to true when ready to show
-const showProjects = false; // Set to true when ready to show
 
 // Get all posts and projects, sorted by date (newest first)
 const allPosts = (await getCollection("writing")).sort(
@@ -15,188 +11,723 @@ const allProjects = (await getCollection("projects")).sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
 );
 
-// Get latest project for "Currently working on"
-const latestProject = allProjects.length > 0 ? allProjects[0] : null;
-
-// Decorative emoticon - EASY TO CHANGE: Just replace the text below
-// This appears at the top of the main content area
-const decorativeEmoji = "૮・ﻌ・ა♡‧₊˚";
+// Project categories for filtering
+const categories = ["All", "Personal", "Experimental", "Technical"];
 ---
 
-<BaseLayout title="Jimmy Liu — Portfolio & Resume">
-  <!-- Decorative Element -->
-  <div class="mb-6 text-2xl">
-    {decorativeEmoji}
-  </div>
+<SinglePageLayout title="Jimmy Liu — Technical Program Manager">
+  <!-- ===== HERO SECTION ===== -->
+  <section
+    id="hero"
+    class="min-h-screen flex items-center pt-24 pb-16 px-6 md:px-12 lg:px-24"
+  >
+    <div class="max-w-4xl mx-auto w-full">
+      <!-- Decorative Element -->
+      <div class="mb-6 text-3xl md:text-4xl animate-bounce-slow">
+        ૮・ﻌ・ა♡‧₊˚
+      </div>
 
-  <!-- Introduction -->
-  <div class="mb-12 max-w-3xl">
-    <p class="mb-4 text-light-text dark:text-dark-text">
-      Hey! I'm Jimmy Liu, a purpose-driven Technical Program Manager passionate
-      about building technology that serves people.
-    </p>
+      <!-- Main Headline -->
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+        <span class="block">Hey, I'm</span>
+        <span class="block outlined-text text-5xl md:text-7xl lg:text-8xl"
+          >Jimmy Liu</span
+        >
+      </h1>
 
-    <p class="mb-4 text-light-text dark:text-dark-text">
-      Currently, I orchestrate global data operations at <a
-        href="https://www.nvidia.com/en-us/solutions/autonomous-vehicles/"
-        target="_blank"
-        rel="noopener"
-        class="font-bold text-blue-600 hover:text-blue-800 underline dark:text-blue-400 dark:hover:text-blue-300"
-        >NVIDIA</a
-      >—managing delivery pipelines that power NCAP 5-star safety ratings and
-      L2++ autonomy. Previously at <a
-        href="https://www.magicleap.com"
-        target="_blank"
-        rel="noopener"
-        class="font-bold text-blue-600 hover:text-blue-800 underline dark:text-blue-400 dark:hover:text-blue-300"
-        >Magic Leap</a
-      > and <a
-        href="https://www.aboutamazon.com/what-we-do/devices-services"
-        target="_blank"
-        rel="noopener"
-        class="font-bold text-blue-600 hover:text-blue-800 underline dark:text-blue-400 dark:hover:text-blue-300"
-        >Amazon</a
-      >. <a
-        href="/about"
-        class="font-bold text-blue-600 hover:text-blue-800 underline dark:text-blue-400 dark:hover:text-blue-300"
-        >Learn more about my work.</a
+      <!-- Introduction -->
+      <p class="text-lg md:text-xl mb-6 max-w-2xl leading-relaxed opacity-90">
+        A purpose-driven <strong>Technical Program Manager</strong> passionate about
+        building technology that serves people.
+      </p>
+
+      <p class="text-base md:text-lg mb-8 max-w-2xl leading-relaxed opacity-80">
+        Currently orchestrating global data operations at <a
+          href="https://www.nvidia.com/en-us/solutions/autonomous-vehicles/"
+          target="_blank"
+          rel="noopener"
+          class="font-bold underline hover:opacity-70 transition">NVIDIA</a
+        >—managing delivery pipelines that power NCAP 5-star safety ratings and
+        L2++ autonomy.
+      </p>
+
+      <!-- Primary CTAs -->
+      <div class="flex flex-wrap gap-4 mb-12">
+        <a href="#projects" class="btn-primary">
+          View My Work
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </a>
+        <a href="#contact" class="btn-secondary"> Get in Touch </a>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div
+        class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:block"
       >
-    </p>
-
-    <p class="mb-4 text-light-text dark:text-dark-text">
-      This site is where I share my professional journey, technical projects,
-      and thoughts on making data-driven decisions at scale.
-    </p>
-  </div>
-
-  {
-    /*
-    <!-- Writings Section (commented out) -->
-    <div class="mb-16">
-      <h2 class="text-3xl font-bold mb-8 text-link dark:text-link-dark">
-        Writing (Work in Progress)
-      </h2>
+        <svg
+          class="w-6 h-6 opacity-50"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
     </div>
-  */
-  }
+  </section>
 
-  {
-    showWritings && allPosts.length > 0 && (
-      <div class="mb-16">
-        <div class="space-y-8">
-          {allPosts.map((post) => {
-            const postDate = new Date(post.data.date);
-            const isRecent =
-              Date.now() - postDate.getTime() < 90 * 24 * 60 * 60 * 1000; // Within last 90 days
-            const status = isRecent ? "(Recent)" : "";
+  <!-- ===== PROJECTS SECTION ===== -->
+  <section
+    id="projects"
+    class="py-24 px-6 md:px-12 lg:px-24 bg-black/[0.02] dark:bg-white/[0.02]"
+  >
+    <div class="max-w-6xl mx-auto">
+      <div
+        class="flex flex-col md:flex-row md:items-end md:justify-between mb-12"
+      >
+        <div>
+          <span class="text-sm font-mono opacity-60 mb-2 block">01</span>
+          <h2 class="text-4xl md:text-5xl font-bold">Projects</h2>
+        </div>
 
-            return (
-              <div class="mb-8">
-                <h3 class="text-xl font-bold mb-2">
-                  <a
-                    href={`/writing/${post.slug}`}
-                    class="underline text-link dark:text-link-dark hover:opacity-70"
-                  >
-                    {post.data.title}
-                  </a>
-                  {status && (
-                    <span class="text-sm font-normal text-light-text dark:text-dark-text">
-                      {" "}
-                      {status}
-                    </span>
-                  )}
-                </h3>
-                <p class="mb-3 text-light-text dark:text-dark-text">
-                  {post.data.description}
-                </p>
-                <p class="text-sm text-light-text dark:text-dark-text">
-                  <a
-                    href={`/writing/${post.slug}`}
-                    class="underline text-link dark:text-link-dark"
-                  >
-                    Read more
-                  </a>
-                  .
-                </p>
-              </div>
-            );
-          })}
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap gap-2 mt-6 md:mt-0" id="project-filters">
+          {
+            categories.map((cat, index) => (
+              <button
+                class={`filter-btn px-4 py-2 text-sm font-medium border-2 border-black dark:border-white transition
+                ${index === 0 ? "bg-black dark:bg-white text-white dark:text-black" : "hover:bg-black/10 dark:hover:bg-white/10"}`}
+                data-category={cat.toLowerCase()}
+              >
+                {cat}
+              </button>
+            ))
+          }
         </div>
       </div>
-    )
-  }
 
-  {
-    showProjects && allProjects.length > 0 && (
-      <div>
-        <h2 class="text-3xl font-bold mb-8 text-link dark:text-link-dark">
-          Projects
-        </h2>
+      <!-- Projects Grid -->
+      <div
+        id="projects-grid"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        {
+          allProjects.length > 0 ? (
+            allProjects.map((project) => {
+              const projectDate = new Date(project.data.date);
+              const isRecent =
+                Date.now() - projectDate.getTime() < 90 * 24 * 60 * 60 * 1000;
+              // Use category from frontmatter (defaults to 'personal' if not set)
+              const category = project.data.category || "personal";
 
-        <div class="space-y-8">
-          {allProjects.map((project) => {
-            const projectDate = new Date(project.data.date);
-            const isRecent =
-              Date.now() - projectDate.getTime() < 90 * 24 * 60 * 60 * 1000;
-            const status = isRecent ? "(Recent)" : "(Available)";
-
-            return (
-              <div class="mb-8">
-                <h3 class="text-xl font-bold mb-2">
-                  <a
-                    href={`/projects/${project.slug}`}
-                    class="underline text-link dark:text-link-dark hover:opacity-70"
-                  >
-                    {project.data.title}
-                  </a>
-                  <span class="text-sm font-normal text-light-text dark:text-dark-text">
-                    {" "}
-                    ({status})
-                  </span>
-                </h3>
-                <p class="mb-3 text-light-text dark:text-dark-text">
-                  {project.data.description}
-                </p>
-                <p class="text-sm text-light-text dark:text-dark-text">
-                  {project.data.demoUrl && (
-                    <>
+              return (
+                <article
+                  class="project-card group border-4 border-black dark:border-white bg-light-bg dark:bg-dark-bg p-6 transition-all hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
+                  data-category={category}
+                >
+                  {isRecent && (
+                    <span class="inline-block px-2 py-1 text-xs font-bold bg-accent dark:bg-accent-dark text-white dark:text-black mb-3">
+                      NEW
+                    </span>
+                  )}
+                  <h3 class="text-xl font-bold mb-2 group-hover:underline">
+                    <a
+                      href={`/projects/${project.slug}`}
+                      class="hover:opacity-100"
+                    >
+                      {project.data.title}
+                    </a>
+                  </h3>
+                  <p class="text-sm opacity-80 mb-4 line-clamp-3">
+                    {project.data.description}
+                  </p>
+                  {project.data.tags && project.data.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      {project.data.tags.slice(0, 3).map((tag: string) => (
+                        <span class="text-xs px-2 py-1 border border-black/30 dark:border-white/30">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <div class="flex gap-3 text-sm font-medium">
+                    {project.data.demoUrl && (
                       <a
                         href={project.data.demoUrl}
                         target="_blank"
                         rel="noopener"
-                        class="underline text-link dark:text-link-dark"
+                        class="underline hover:opacity-70"
                       >
-                        View demo
+                        Demo →
                       </a>
-                      ,{" "}
-                    </>
-                  )}
-                  {project.data.githubUrl && (
-                    <>
+                    )}
+                    {project.data.githubUrl && (
                       <a
                         href={project.data.githubUrl}
                         target="_blank"
                         rel="noopener"
-                        class="underline text-link dark:text-link-dark"
+                        class="underline hover:opacity-70"
                       >
-                        view source
+                        Source →
                       </a>
-                      ,{" "}
-                    </>
-                  )}
-                  <a
-                    href={`/projects/${project.slug}`}
-                    class="underline text-link dark:text-link-dark"
-                  >
-                    read more
-                  </a>
-                  .
-                </p>
-              </div>
-            );
-          })}
+                    )}
+                    <a
+                      href={`/projects/${project.slug}`}
+                      class="underline hover:opacity-70"
+                    >
+                      Details →
+                    </a>
+                  </div>
+                </article>
+              );
+            })
+          ) : (
+            <div class="col-span-full text-center py-12 border-4 border-dashed border-black/30 dark:border-white/30">
+              <p class="text-lg opacity-60">Projects coming soon...</p>
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Load More Button (shown when > 6 projects) -->
+      {
+        allProjects.length > 6 && (
+          <div class="text-center mt-12">
+            <button
+              id="load-more-projects"
+              class="px-8 py-3 border-2 border-black dark:border-white font-semibold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"
+            >
+              Load More Projects
+            </button>
+          </div>
+        )
+      }
+
+      <!-- CTA between sections -->
+      <div class="mt-16 text-center">
+        <p class="text-lg opacity-70 mb-4">Interested in working together?</p>
+        <a href="#contact" class="btn-secondary">
+          Let's Connect
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT SECTION ===== -->
+  <section id="about" class="py-24 px-6 md:px-12 lg:px-24">
+    <div class="max-w-4xl mx-auto">
+      <span
+        class="text-2xl md:text-3xl font-bold mb-2 block text-accent dark:text-accent-dark"
+        >02</span
+      >
+      <h2 class="text-4xl md:text-5xl font-bold mb-12">About</h2>
+
+      <!-- Skills Grid -->
+      <div class="mb-16">
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-1 bg-black dark:bg-white"></span>
+          Core Skills
+        </h3>
+        <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+          <li
+            class="pl-4 border-l-4 border-black dark:border-white py-2 hover:bg-black/5 dark:hover:bg-white/5 transition"
+          >
+            ML Operations (MLOps)
+          </li>
+          <li
+            class="pl-4 border-l-4 border-black dark:border-white py-2 hover:bg-black/5 dark:hover:bg-white/5 transition"
+          >
+            Data Lifecycle Management
+          </li>
+          <li
+            class="pl-4 border-l-4 border-black dark:border-white py-2 hover:bg-black/5 dark:hover:bg-white/5 transition"
+          >
+            Python & SQL Automation
+          </li>
+          <li
+            class="pl-4 border-l-4 border-black dark:border-white py-2 hover:bg-black/5 dark:hover:bg-white/5 transition"
+          >
+            ADAS / AV Infrastructure
+          </li>
+          <li
+            class="pl-4 border-l-4 border-black dark:border-white py-2 hover:bg-black/5 dark:hover:bg-white/5 transition"
+          >
+            Agile & Scrum Methodologies
+          </li>
+          <li
+            class="pl-4 border-l-4 border-black dark:border-white py-2 hover:bg-black/5 dark:hover:bg-white/5 transition"
+          >
+            Regulatory Standards (NCAP)
+          </li>
+        </ul>
+      </div>
+
+      <!-- Experience Timeline -->
+      <div class="mb-16">
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-1 bg-black dark:bg-white"></span>
+          Experience
+        </h3>
+        <div class="space-y-8">
+          <div class="pl-6 border-l-4 border-black dark:border-white relative">
+            <div
+              class="absolute -left-3 top-0 w-6 h-6 bg-black dark:bg-white rounded-full"
+            >
+            </div>
+            <span class="text-sm font-mono opacity-60">2024 — PRESENT</span>
+            <h4 class="text-lg font-bold mt-1">
+              Technical Program Manager, ML Operations
+            </h4>
+            <p class="text-sm font-semibold opacity-80 mb-2">NVIDIA</p>
+            <p class="text-sm opacity-80">
+              Led end-to-end data delivery for Active Safety features,
+              contributing to NCAP 5-star ratings on upcoming
+              <a
+                href="https://blogs.nvidia.com/blog/drive-av-software-mercedes-benz-cla/"
+                target="_blank"
+                rel="noopener"
+                class="underline font-semibold">Mercedes-Benz 2026 CLA</a
+              >. Improved labeling output quality from 30% yield to 90% via
+              iterative process refinements.
+            </p>
+          </div>
+
+          <div class="pl-6 border-l-4 border-black dark:border-white relative">
+            <div
+              class="absolute -left-3 top-0 w-6 h-6 bg-black/60 dark:bg-white/60 rounded-full"
+            >
+            </div>
+            <span class="text-sm font-mono opacity-60">2022 — 2024</span>
+            <h4 class="text-lg font-bold mt-1">
+              Technical Program Manager, AV Data Operations
+            </h4>
+            <p class="text-sm font-semibold opacity-80 mb-2">NVIDIA</p>
+            <p class="text-sm opacity-80">
+              Managed global delivery of 13,000+ hours of driving data.
+              Implemented P50/P90 uptime targets, yielding a 10% improvement in
+              data output and reducing downtime by 30%.
+            </p>
+          </div>
+
+          <div class="pl-6 border-l-4 border-black dark:border-white relative">
+            <div
+              class="absolute -left-3 top-0 w-6 h-6 bg-black/40 dark:bg-white/40 rounded-full"
+            >
+            </div>
+            <span class="text-sm font-mono opacity-60">2021 — 2022</span>
+            <h4 class="text-lg font-bold mt-1">
+              Senior Data Collection Engineer
+            </h4>
+            <p class="text-sm font-semibold opacity-80 mb-2">Magic Leap</p>
+            <p class="text-sm opacity-80">
+              Re-developed data collection pipelines for new workstreams,
+              improving efficiency by 40%. Developed custom Python applications
+              for hardware configuration and automated data tagging.
+            </p>
+          </div>
+
+          <div class="pl-6 border-l-4 border-black dark:border-white relative">
+            <div
+              class="absolute -left-3 top-0 w-6 h-6 bg-black/20 dark:bg-white/20 rounded-full"
+            >
+            </div>
+            <span class="text-sm font-mono opacity-60">2020 — 2021</span>
+            <h4 class="text-lg font-bold mt-1">Data Collection Specialist</h4>
+            <p class="text-sm font-semibold opacity-80 mb-2">Amazon Lab 126</p>
+            <p class="text-sm opacity-80">
+              Managed collection efforts for Alexa Q&A projects including Amazon
+              Astro, Amazon Ring, and Amazon Echo.
+            </p>
+          </div>
         </div>
       </div>
-    )
+
+      <!-- Education -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+          <span class="w-8 h-1 bg-black dark:bg-white"></span>
+          Education
+        </h3>
+        <div class="pl-6 border-l-4 border-black dark:border-white">
+          <h4 class="text-lg font-bold">B.S. in Biological Sciences</h4>
+          <p class="text-sm opacity-80">
+            University of California, Santa Barbara (2018)
+          </p>
+        </div>
+      </div>
+
+      <!-- Resume CTA -->
+      <div class="flex flex-wrap gap-4 mt-12">
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          class="btn-secondary"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            ></path>
+          </svg>
+          Download Resume
+        </a>
+        <a
+          href="#contact"
+          class="btn-secondary"
+        >
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WRITING SECTION ===== -->
+  <section
+    id="writing"
+    class="py-24 px-6 md:px-12 lg:px-24 bg-black/[0.02] dark:bg-white/[0.02]"
+  >
+    <div class="max-w-4xl mx-auto">
+      <span
+        class="text-2xl md:text-3xl font-bold mb-2 block text-accent dark:text-accent-dark"
+        >03</span
+      >
+      <h2 class="text-4xl md:text-5xl font-bold mb-12">Writing</h2>
+
+      {
+        allPosts.length > 0 ? (
+          <div class="space-y-8">
+            {allPosts.map((post) => {
+              const postDate = new Date(post.data.date);
+              const isRecent =
+                Date.now() - postDate.getTime() < 90 * 24 * 60 * 60 * 1000;
+              const formattedDate = postDate.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              });
+
+              return (
+                <article class="group border-l-4 border-black dark:border-white pl-6 py-4 hover:bg-black/5 dark:hover:bg-white/5 transition">
+                  <div class="flex items-start justify-between gap-4">
+                    <div class="flex-1">
+                      <span class="text-sm font-mono opacity-60">
+                        {formattedDate}
+                      </span>
+                      {isRecent && (
+                        <span class="ml-2 px-2 py-0.5 text-xs font-bold bg-black dark:bg-white text-white dark:text-black">
+                          NEW
+                        </span>
+                      )}
+                      <h3 class="text-xl font-bold mt-1 group-hover:underline">
+                        <a href={`/writing/${post.slug}`}>{post.data.title}</a>
+                      </h3>
+                      <p class="text-sm opacity-80 mt-2">
+                        {post.data.description}
+                      </p>
+                    </div>
+                    <a
+                      href={`/writing/${post.slug}`}
+                      class="text-2xl opacity-40 group-hover:opacity-100 transition"
+                    >
+                      →
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        ) : (
+          <div class="text-center py-12 border-4 border-dashed border-black/30 dark:border-white/30">
+            <p class="text-lg opacity-60 mb-4">Writing coming soon...</p>
+            <p class="text-sm opacity-40">
+              Check back for thoughts on technology, data, and building at
+              scale.
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section id="contact" class="py-24 px-6 md:px-12 lg:px-24">
+    <div class="max-w-2xl mx-auto">
+      <span
+        class="text-2xl md:text-3xl font-bold mb-2 block text-accent dark:text-accent-dark"
+        >04</span
+      >
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">Get in Touch</h2>
+
+      <p class="text-lg opacity-80 mb-12">
+        Let's work together! Feel free to reach out for collaborations,
+        opportunities, or just to say hi.
+      </p>
+
+      <form
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        class="space-y-6"
+      >
+        <input
+          type="hidden"
+          name="access_key"
+          value={import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY}
+        />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label for="name" class="block text-sm font-semibold mb-2"
+              >Name</label
+            >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="w-full p-4 border-2 border-black dark:border-white bg-transparent focus:outline-none focus:ring-4 focus:ring-black/20 dark:focus:ring-white/20 transition"
+              placeholder="Your name"
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-semibold mb-2"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full p-4 border-2 border-black dark:border-white bg-transparent focus:outline-none focus:ring-4 focus:ring-black/20 dark:focus:ring-white/20 transition"
+              placeholder="your@email.com"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="subject" class="block text-sm font-semibold mb-2"
+            >Subject</label
+          >
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            required
+            class="w-full p-4 border-2 border-black dark:border-white bg-transparent focus:outline-none focus:ring-4 focus:ring-black/20 dark:focus:ring-white/20 transition"
+            placeholder="What's this about?"
+          />
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-semibold mb-2"
+            >Message</label
+          >
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            required
+            class="w-full p-4 border-2 border-black dark:border-white bg-transparent focus:outline-none focus:ring-4 focus:ring-black/20 dark:focus:ring-white/20 transition resize-none"
+            placeholder="Tell me more..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary w-full md:w-auto">
+          Send Message →
+        </button>
+      </form>
+
+      <!-- Alternative Contact Methods -->
+      <div class="mt-16 pt-8 border-t-2 border-black/20 dark:border-white/20">
+        <p class="text-sm opacity-60 mb-4">Or reach out directly:</p>
+        <div class="flex flex-wrap gap-6">
+          <a
+            href="mailto:jimmyliuzg@gmail.com"
+            class="flex items-center gap-2 text-sm font-medium hover:underline"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+              ></path>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+              ></path>
+            </svg>
+            Email
+          </a>
+          <a
+            href="https://github.com/jimmyliuzg"
+            target="_blank"
+            rel="noopener"
+            class="flex items-center gap-2 text-sm font-medium hover:underline"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23a11.509 11.509 0 013.004-.404c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+              ></path>
+            </svg>
+            GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/jimmy-l-92b028112/"
+            target="_blank"
+            rel="noopener"
+            class="flex items-center gap-2 text-sm font-medium hover:underline"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+              ></path>
+            </svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="py-8 px-6 border-t-4 border-black dark:border-white">
+    <div
+      class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4"
+    >
+      <p class="text-sm opacity-60">
+        © {new Date().getFullYear()} Jimmy Liu. Built with Astro.
+      </p>
+      <p class="text-2xl">૮・ﻌ・ა♡‧₊˚</p>
+    </div>
+  </footer>
+</SinglePageLayout>
+
+<style>
+  /* Slow bounce animation for emoji */
+  @keyframes bounce-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
-</BaseLayout>
+
+  .animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
+  }
+
+  /* Line clamp for project descriptions */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  // Project filtering
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const projectCards = document.querySelectorAll(".project-card");
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const category = btn.getAttribute("data-category");
+
+      // Update button styles
+      filterBtns.forEach((b) => {
+        b.classList.remove(
+          "bg-black",
+          "dark:bg-white",
+          "text-white",
+          "dark:text-black",
+        );
+      });
+      btn.classList.add(
+        "bg-black",
+        "dark:bg-white",
+        "text-white",
+        "dark:text-black",
+      );
+
+      // Filter projects
+      projectCards.forEach((card) => {
+        const cardCategory = card.getAttribute("data-category");
+        if (category === "all" || cardCategory === category) {
+          (card as HTMLElement).style.display = "block";
+          setTimeout(() => {
+            (card as HTMLElement).style.opacity = "1";
+            (card as HTMLElement).style.transform = "translateY(0)";
+          }, 50);
+        } else {
+          (card as HTMLElement).style.opacity = "0";
+          (card as HTMLElement).style.transform = "translateY(20px)";
+          setTimeout(() => {
+            (card as HTMLElement).style.display = "none";
+          }, 300);
+        }
+      });
+    });
+  });
+
+  // Load more functionality
+  const loadMoreBtn = document.getElementById("load-more-projects");
+  let visibleCount = 6;
+
+  if (loadMoreBtn) {
+    // Initially hide projects beyond 6
+    projectCards.forEach((card, index) => {
+      if (index >= 6) {
+        (card as HTMLElement).style.display = "none";
+      }
+    });
+
+    loadMoreBtn.addEventListener("click", () => {
+      const hiddenCards = Array.from(projectCards).slice(
+        visibleCount,
+        visibleCount + 3,
+      );
+      hiddenCards.forEach((card) => {
+        (card as HTMLElement).style.display = "block";
+        setTimeout(() => {
+          (card as HTMLElement).style.opacity = "1";
+        }, 50);
+      });
+      visibleCount += 3;
+
+      if (visibleCount >= projectCards.length) {
+        loadMoreBtn.style.display = "none";
+      }
+    });
+  }
+</script>

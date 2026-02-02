@@ -8,6 +8,7 @@ const projects = defineCollection({
     date: z.date(),
     thumbnail: z.string().optional(),
     tags: z.array(z.string()).optional(),
+    category: z.enum(['personal', 'experimental', 'technical']).optional().default('personal'),
     demoUrl: z.string().url().optional(),
     githubUrl: z.string().url().optional(),
     liveUrl: z.string().url().optional(),

@@ -2,23 +2,217 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Link styling - blue for light mode, white for dark mode */
+/* Base layer styles */
 @layer base {
-  a {
-    @apply text-link dark:text-link-dark;
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
   }
-  
+
+  /* Typography scale - consistent throughout site */
+  h1 {
+    @apply text-5xl md:text-7xl font-bold leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-5xl font-bold leading-tight;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl font-bold leading-snug;
+  }
+
+  /* Link styling */
+  a {
+    @apply text-accent dark:text-accent-dark transition-opacity;
+  }
+
   a:hover {
     @apply opacity-70;
   }
+
+  /* Better focus states for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent dark:outline-accent-dark;
+  }
+
+  /* Section scroll margin to account for fixed nav */
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
+  /* Form input focus states with brutalist shadow */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    @apply outline-none;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.8);
+  }
+
+  .dark input:focus,
+  .dark textarea:focus,
+  .dark select:focus {
+    box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.8);
+  }
 }
 
-/* Outlined text style for logo/name */
+/* Component layer styles */
+@layer components {
+
+  /* Brutalist card style */
+  .brutalist-card {
+    @apply border-4 border-black dark:border-white bg-light-bg dark:bg-dark-bg p-6;
+    @apply transition-all duration-200;
+    @apply hover:-translate-y-1;
+    @apply hover:shadow-[8px_8px_0px_0px_rgba(0, 0, 0, 1)];
+    @apply dark:hover:shadow-[8px_8px_0px_0px_rgba(255, 255, 255, 1)];
+  }
+
+  /* Primary button style - ONE per section */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4;
+    @apply bg-black dark:bg-white text-white dark:text-black;
+    @apply font-bold text-base md:text-lg border-2 border-black dark:border-white;
+    @apply hover:scale-105 transition-transform;
+  }
+
+  /* Secondary button style - outlines */
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4;
+    @apply border-2 border-black dark:border-white font-semibold text-base md:text-lg;
+    @apply hover:bg-black hover:text-white;
+    @apply dark:hover:bg-white dark:hover:text-black transition;
+  }
+
+  /* Section number indicator */
+  .section-number {
+    @apply text-sm font-mono opacity-60 mb-2 block;
+  }
+
+  /* Timeline dot */
+  .timeline-dot {
+    @apply absolute -left-3 top-0 w-6 h-6 rounded-full;
+  }
+}
+
+/* Utility layer styles */
 @layer utilities {
+
+  /* Outlined text style for logo/name */
   .outlined-text {
     -webkit-text-stroke: 2px currentColor;
     -webkit-text-fill-color: transparent;
     text-stroke: 2px currentColor;
     text-fill-color: transparent;
   }
+
+  /* Active nav indicator */
+  .nav-active {
+    @apply font-bold relative;
+  }
+
+  .nav-active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-current;
+  }
+
+  /* Glassmorphism background */
+  .glass-bg {
+    @apply bg-light-bg/95 dark:bg-dark-bg/95 backdrop-blur-sm;
+  }
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-slow {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.8s ease-out forwards;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+/* Staggered animation delays for lists */
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.stagger-5 {
+  animation-delay: 0.5s;
+}
+
+.stagger-6 {
+  animation-delay: 0.6s;
+}
+
+/* Project card transition states */
+.project-card {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Selection styling */
+::selection {
+  @apply bg-black text-white dark:bg-white dark:text-black;
 }

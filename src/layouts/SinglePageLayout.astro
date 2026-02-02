@@ -1,0 +1,289 @@
+---
+import "../styles/global.css";
+
+interface Props {
+    title: string;
+    description?: string;
+}
+
+const {
+    title,
+    description = "Technical Program Manager | Portfolio & Resume",
+} = Astro.props;
+
+const navLinks = [
+    { label: "Projects", href: "#projects" },
+    { label: "About", href: "#about" },
+    { label: "Writing", href: "#writing" },
+    { label: "Contact", href: "#contact" },
+];
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content={description} />
+        <title>{title}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body
+        class="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text font-sans leading-relaxed"
+    >
+        <!-- Fixed Navigation -->
+        <nav
+            id="main-nav"
+            class="fixed top-0 left-0 right-0 z-50 bg-light-bg/95 dark:bg-dark-bg/95 backdrop-blur-sm border-b border-black/10 dark:border-white/10 transition-transform duration-300"
+        >
+            <div
+                class="max-w-6xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center"
+            >
+                <a
+                    href="#hero"
+                    class="text-xl md:text-2xl font-bold hover:opacity-70 transition-opacity"
+                >
+                    Jimmy Liu
+                </a>
+
+                <!-- Desktop Navigation -->
+                <ul class="hidden md:flex gap-8 text-sm font-medium">
+                    {
+                        navLinks.map((link) => (
+                            <li>
+                                <a
+                                    href={link.href}
+                                    class="nav-link relative py-2 hover:opacity-70 transition-opacity uppercase tracking-wider"
+                                    data-section={link.href.slice(1)}
+                                >
+                                    {link.label}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+
+                <!-- Mobile Menu Button + Dark Mode Toggle -->
+                <div class="flex items-center gap-3">
+                    <button
+                        data-dark-toggle
+                        aria-label="Toggle Dark Mode"
+                        class="p-2 border-2 border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition text-sm"
+                    >
+                        ☀/☾
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button
+                        id="mobile-menu-btn"
+                        class="md:hidden p-2 border-2 border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"
+                        aria-label="Toggle menu"
+                    >
+                        <svg
+                            class="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div
+                id="mobile-menu"
+                class="hidden md:hidden border-t border-black/10 dark:border-white/10 bg-light-bg dark:bg-dark-bg"
+            >
+                <ul class="flex flex-col py-4">
+                    {
+                        navLinks.map((link) => (
+                            <li>
+                                <a
+                                    href={link.href}
+                                    class="block px-6 py-3 hover:bg-black/5 dark:hover:bg-white/5 uppercase tracking-wider text-sm font-medium"
+                                    data-section={link.href.slice(1)}
+                                >
+                                    {link.label}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <slot />
+        </main>
+
+        <!-- Back to Top Button -->
+        <button
+            id="back-to-top"
+            class="fixed bottom-8 right-8 w-12 h-12 bg-black dark:bg-white text-white dark:text-black border-2 border-black dark:border-white opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 z-40 flex items-center justify-center"
+            aria-label="Back to top"
+        >
+            <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.5"
+                    d="M5 15l7-7 7 7"></path>
+            </svg>
+        </button>
+
+        <script is:inline>
+            // Dark mode toggle logic
+            const toggleBtns = document.querySelectorAll("[data-dark-toggle]");
+            const html = document.documentElement;
+
+            toggleBtns.forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    html.classList.toggle("dark");
+                    localStorage.setItem(
+                        "theme",
+                        html.classList.contains("dark") ? "dark" : "light",
+                    );
+                });
+            });
+
+            // Initialize theme from localStorage or system preference
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "dark") {
+                html.classList.add("dark");
+            } else if (savedTheme === "light") {
+                html.classList.remove("dark");
+            } else if (
+                window.matchMedia("(prefers-color-scheme: dark)").matches
+            ) {
+                html.classList.add("dark");
+            }
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+            const mobileMenu = document.getElementById("mobile-menu");
+
+            mobileMenuBtn?.addEventListener("click", () => {
+                mobileMenu?.classList.toggle("hidden");
+            });
+
+            // Close mobile menu when clicking a link
+            mobileMenu?.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", () => {
+                    mobileMenu.classList.add("hidden");
+                });
+            });
+
+            // Back to top button
+            const backToTop = document.getElementById("back-to-top");
+            const mainNav = document.getElementById("main-nav");
+
+            // Track scroll position for hide/show nav
+            let lastScrollY = window.scrollY;
+            let ticking = false;
+
+            function handleScroll() {
+                const currentScrollY = window.scrollY;
+
+                // Back to top button visibility
+                if (currentScrollY > 500) {
+                    backToTop?.classList.remove(
+                        "opacity-0",
+                        "pointer-events-none",
+                    );
+                    backToTop?.classList.add(
+                        "opacity-100",
+                        "pointer-events-auto",
+                    );
+                } else {
+                    backToTop?.classList.add(
+                        "opacity-0",
+                        "pointer-events-none",
+                    );
+                    backToTop?.classList.remove(
+                        "opacity-100",
+                        "pointer-events-auto",
+                    );
+                }
+
+                // Hide/show nav based on scroll direction
+                // Only hide nav after scrolling past hero section (300px)
+                if (currentScrollY > 300) {
+                    if (currentScrollY > lastScrollY) {
+                        // Scrolling down - hide nav
+                        mainNav?.classList.add("-translate-y-full");
+                    } else {
+                        // Scrolling up - show nav
+                        mainNav?.classList.remove("-translate-y-full");
+                    }
+                } else {
+                    // Always show nav at top of page
+                    mainNav?.classList.remove("-translate-y-full");
+                }
+
+                lastScrollY = currentScrollY;
+                ticking = false;
+            }
+
+            window.addEventListener("scroll", () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        handleScroll();
+                    });
+                    ticking = true;
+                }
+            });
+
+            backToTop?.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+
+            // Active section highlighting
+            const navLinks = document.querySelectorAll(".nav-link");
+            const sections = document.querySelectorAll("section[id]");
+
+            function updateActiveNav() {
+                const scrollPosition = window.scrollY + 200;
+
+                sections.forEach((section) => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute("id");
+
+                    if (
+                        scrollPosition >= sectionTop &&
+                        scrollPosition < sectionTop + sectionHeight
+                    ) {
+                        navLinks.forEach((link) => {
+                            link.classList.remove("font-bold");
+                            if (
+                                link.getAttribute("data-section") === sectionId
+                            ) {
+                                link.classList.add("font-bold");
+                            }
+                        });
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", updateActiveNav);
+            updateActiveNav();
+        </script>
+    </body>
+</html>
