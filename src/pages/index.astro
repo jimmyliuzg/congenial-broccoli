@@ -110,8 +110,8 @@ const categories = ["All", "Personal", "Experimental", "Technical"];
           {
             categories.map((cat, index) => (
               <button
-                class={`filter-btn px-4 py-2 text-sm font-medium border-2 border-black dark:border-white transition
-                ${index === 0 ? "bg-black dark:bg-white text-white dark:text-black" : "hover:bg-black/10 dark:hover:bg-white/10"}`}
+                class={`filter-btn px-4 py-2 text-sm font-medium border-2 transition
+                ${index === 0 ? "bg-accent dark:bg-accent-dark text-white dark:text-dark-bg border-accent dark:border-accent-dark" : "border-secondary dark:border-secondary-dark text-secondary dark:text-secondary-dark hover:border-accent dark:hover:border-accent-dark hover:text-accent dark:hover:text-accent-dark"}`}
                 data-category={cat.toLowerCase()}
               >
                 {cat}
@@ -137,7 +137,7 @@ const categories = ["All", "Personal", "Experimental", "Technical"];
 
               return (
                 <article
-                  class="project-card group border-4 border-black dark:border-white bg-light-bg dark:bg-dark-bg p-6 transition-all hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
+                  class="project-card group border-4 border-secondary/40 dark:border-secondary-dark/40 bg-light-card dark:bg-dark-card p-6 transition-all hover:-translate-y-1 hover:border-accent dark:hover:border-accent-dark hover:shadow-[8px_8px_0px_0px_#1E4A6B] dark:hover:shadow-[8px_8px_0px_0px_#FF6B6B]"
                   data-category={category}
                 >
                   {isRecent && (
@@ -243,46 +243,43 @@ const categories = ["All", "Personal", "Experimental", "Technical"];
   <!-- ===== ABOUT SECTION ===== -->
   <section id="about" class="py-24 px-6 md:px-12 lg:px-24">
     <div class="max-w-4xl mx-auto">
-      <span
-        class="text-2xl md:text-3xl font-bold mb-2 block text-accent dark:text-accent-dark"
-        >02</span
-      >
+      <span class="text-sm font-mono opacity-60 mb-2 block">02</span>
       <h2 class="text-4xl md:text-5xl font-bold mb-12">About</h2>
 
       <!-- Skills Grid -->
       <div class="mb-16">
         <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-1 bg-black dark:bg-white"></span>
+          <span class="w-8 h-1 bg-accent dark:bg-accent-dark"></span>
           Core Skills
         </h3>
         <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
           <li
-            class="pl-4 border-l-4 border-black dark:border-white py-2 hover:bg-black/5 dark:hover:bg-white/5 transition"
+            class="pl-4 border-l-4 border-secondary/40 dark:border-secondary-dark/40 py-2 hover:border-accent dark:hover:border-accent-dark hover:bg-accent/5 dark:hover:bg-accent-dark/5 transition"
           >
             ML Operations (MLOps)
           </li>
           <li
-            class="pl-4 border-l-4 border-black dark:border-white py-2 hover:bg-black/5 dark:hover:bg-white/5 transition"
+            class="pl-4 border-l-4 border-secondary/40 dark:border-secondary-dark/40 py-2 hover:border-accent dark:hover:border-accent-dark hover:bg-accent/5 dark:hover:bg-accent-dark/5 transition"
           >
             Data Lifecycle Management
           </li>
           <li
-            class="pl-4 border-l-4 border-black dark:border-white py-2 hover:bg-black/5 dark:hover:bg-white/5 transition"
+            class="pl-4 border-l-4 border-secondary/40 dark:border-secondary-dark/40 py-2 hover:border-accent dark:hover:border-accent-dark hover:bg-accent/5 dark:hover:bg-accent-dark/5 transition"
           >
             Python & SQL Automation
           </li>
           <li
-            class="pl-4 border-l-4 border-black dark:border-white py-2 hover:bg-black/5 dark:hover:bg-white/5 transition"
+            class="pl-4 border-l-4 border-secondary/40 dark:border-secondary-dark/40 py-2 hover:border-accent dark:hover:border-accent-dark hover:bg-accent/5 dark:hover:bg-accent-dark/5 transition"
           >
             ADAS / AV Infrastructure
           </li>
           <li
-            class="pl-4 border-l-4 border-black dark:border-white py-2 hover:bg-black/5 dark:hover:bg-white/5 transition"
+            class="pl-4 border-l-4 border-secondary/40 dark:border-secondary-dark/40 py-2 hover:border-accent dark:hover:border-accent-dark hover:bg-accent/5 dark:hover:bg-accent-dark/5 transition"
           >
             Agile & Scrum Methodologies
           </li>
           <li
-            class="pl-4 border-l-4 border-black dark:border-white py-2 hover:bg-black/5 dark:hover:bg-white/5 transition"
+            class="pl-4 border-l-4 border-secondary/40 dark:border-secondary-dark/40 py-2 hover:border-accent dark:hover:border-accent-dark hover:bg-accent/5 dark:hover:bg-accent-dark/5 transition"
           >
             Regulatory Standards (NCAP)
           </li>
@@ -292,7 +289,7 @@ const categories = ["All", "Personal", "Experimental", "Technical"];
       <!-- Experience Timeline -->
       <div class="mb-16">
         <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-1 bg-black dark:bg-white"></span>
+          <span class="w-8 h-1 bg-accent dark:bg-accent-dark"></span>
           Experience
         </h3>
         <div class="space-y-8">
@@ -372,7 +369,7 @@ const categories = ["All", "Personal", "Experimental", "Technical"];
       <!-- Education -->
       <div class="mb-12">
         <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
-          <span class="w-8 h-1 bg-black dark:bg-white"></span>
+          <span class="w-8 h-1 bg-accent dark:bg-accent-dark"></span>
           Education
         </h3>
         <div class="pl-6 border-l-4 border-black dark:border-white">
@@ -385,11 +382,7 @@ const categories = ["All", "Personal", "Experimental", "Technical"];
 
       <!-- Resume CTA -->
       <div class="flex flex-wrap gap-4 mt-12">
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          class="btn-secondary"
-        >
+        <a href="/resume.pdf" target="_blank" class="btn-secondary">
           <svg
             class="w-5 h-5"
             fill="none"
@@ -405,12 +398,7 @@ const categories = ["All", "Personal", "Experimental", "Technical"];
           </svg>
           Download Resume
         </a>
-        <a
-          href="#contact"
-          class="btn-secondary"
-        >
-          Get in Touch
-        </a>
+        <a href="#contact" class="btn-secondary"> Get in Touch </a>
       </div>
     </div>
   </section>
@@ -421,10 +409,7 @@ const categories = ["All", "Personal", "Experimental", "Technical"];
     class="py-24 px-6 md:px-12 lg:px-24 bg-black/[0.02] dark:bg-white/[0.02]"
   >
     <div class="max-w-4xl mx-auto">
-      <span
-        class="text-2xl md:text-3xl font-bold mb-2 block text-accent dark:text-accent-dark"
-        >03</span
-      >
+      <span class="text-sm font-mono opacity-60 mb-2 block">03</span>
       <h2 class="text-4xl md:text-5xl font-bold mb-12">Writing</h2>
 
       {
@@ -486,10 +471,7 @@ const categories = ["All", "Personal", "Experimental", "Technical"];
   <!-- ===== CONTACT SECTION ===== -->
   <section id="contact" class="py-24 px-6 md:px-12 lg:px-24">
     <div class="max-w-2xl mx-auto">
-      <span
-        class="text-2xl md:text-3xl font-bold mb-2 block text-accent dark:text-accent-dark"
-        >04</span
-      >
+      <span class="text-sm font-mono opacity-60 mb-2 block">04</span>
       <h2 class="text-4xl md:text-5xl font-bold mb-6">Get in Touch</h2>
 
       <p class="text-lg opacity-80 mb-12">

@@ -11,6 +11,10 @@
   }
 
   /* Typography scale - consistent throughout site */
+  h1, h2, h3 {
+    @apply font-display;
+  }
+
   h1 {
     @apply text-5xl md:text-7xl font-bold leading-tight;
   }
@@ -47,13 +51,13 @@
   textarea:focus,
   select:focus {
     @apply outline-none;
-    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.8);
+    box-shadow: 4px 4px 0 #1E4A6B;
   }
 
   .dark input:focus,
   .dark textarea:focus,
   .dark select:focus {
-    box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.8);
+    box-shadow: 4px 4px 0 #FF6B6B;
   }
 }
 
@@ -62,7 +66,7 @@
 
   /* Brutalist card style */
   .brutalist-card {
-    @apply border-4 border-black dark:border-white bg-light-bg dark:bg-dark-bg p-6;
+    @apply border-4 border-light-text dark:border-dark-text bg-light-card dark:bg-dark-card p-6;
     @apply transition-all duration-200;
     @apply hover:-translate-y-1;
     @apply hover:shadow-[8px_8px_0px_0px_rgba(0, 0, 0, 1)];
@@ -72,17 +76,18 @@
   /* Primary button style - ONE per section */
   .btn-primary {
     @apply inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4;
-    @apply bg-black dark:bg-white text-white dark:text-black;
-    @apply font-bold text-base md:text-lg border-2 border-black dark:border-white;
+    @apply bg-accent dark:bg-accent-dark text-white dark:text-dark-bg;
+    @apply font-bold text-base md:text-lg border-2 border-accent dark:border-accent-dark;
     @apply hover:scale-105 transition-transform;
   }
 
   /* Secondary button style - outlines */
   .btn-secondary {
     @apply inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4;
-    @apply border-2 border-black dark:border-white font-semibold text-base md:text-lg;
-    @apply hover:bg-black hover:text-white;
-    @apply dark:hover:bg-white dark:hover:text-black transition;
+    @apply border-2 border-accent dark:border-accent-dark font-semibold text-base md:text-lg;
+    @apply text-accent dark:text-accent-dark;
+    @apply hover:bg-accent hover:text-white;
+    @apply dark:hover:bg-accent-dark dark:hover:text-dark-bg transition;
   }
 
   /* Section number indicator */
@@ -214,5 +219,5 @@
 
 /* Selection styling */
 ::selection {
-  @apply bg-black text-white dark:bg-white dark:text-black;
+  @apply bg-accent text-white dark:bg-accent-dark dark:text-dark-bg;
 }
