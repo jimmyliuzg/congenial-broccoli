@@ -21,72 +21,117 @@ const categories = ["All", "Personal", "Experimental", "Technical"];
     id="hero"
     class="min-h-screen flex items-center pt-24 pb-16 px-6 md:px-12 lg:px-24"
   >
-    <div class="max-w-4xl mx-auto w-full">
+    <div class="max-w-3xl mx-auto w-full">
       <!-- Decorative Element -->
-      <div class="mb-6 text-3xl md:text-4xl animate-bounce-slow">
+      <div class="mb-8 text-3xl md:text-4xl animate-bounce-slow">
         ૮・ﻌ・ა♡‧₊˚
       </div>
 
       <!-- Main Headline -->
-      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-        <span class="block">Hey, I'm</span>
-        <span class="block outlined-text text-5xl md:text-7xl lg:text-8xl"
-          >Jimmy Liu</span
-        >
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
+        Hey, I'm <span class="outlined-text">Jimmy Liu</span>
       </h1>
 
-      <!-- Introduction -->
-      <p class="text-lg md:text-xl mb-6 max-w-2xl leading-relaxed opacity-90">
-        A purpose-driven <strong>Technical Program Manager</strong> passionate about
-        building technology that serves people.
-      </p>
+      <!-- Narrative Introduction -->
+      <div class="prose-hero space-y-6 text-lg md:text-xl leading-relaxed">
+        <p class="opacity-90">
+          I'm a <strong>Technical Program Manager</strong> working at
+          <a
+            href="https://www.nvidia.com/en-us/solutions/autonomous-vehicles/"
+            target="_blank"
+            rel="noopener"
+            class="hero-link">NVIDIA</a
+          >, where I orchestrate global data operations for autonomous vehicles.
+          My work contributes to NCAP 5-star safety ratings and L2++ autonomy
+          systems—including the upcoming
+          <a
+            href="https://blogs.nvidia.com/blog/drive-av-software-mercedes-benz-cla/"
+            target="_blank"
+            rel="noopener"
+            class="hero-link">Mercedes-Benz 2026 CLA</a
+          >.
+        </p>
 
-      <p class="text-base md:text-lg mb-8 max-w-2xl leading-relaxed opacity-80">
-        Currently orchestrating global data operations at <a
-          href="https://www.nvidia.com/en-us/solutions/autonomous-vehicles/"
-          target="_blank"
-          rel="noopener"
-          class="font-bold underline hover:opacity-70 transition">NVIDIA</a
-        >—managing delivery pipelines that power NCAP 5-star safety ratings and
-        L2++ autonomy.
-      </p>
-
-      <!-- Primary CTAs -->
-      <div class="flex flex-wrap gap-4 mb-12">
-        <a href="#projects" class="btn-primary">
-          View My Work
-          <svg
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        <p class="opacity-85">
+          I believe in building technology that genuinely serves people. Before
+          NVIDIA, I shaped data collection pipelines at
+          <a
+            href="https://www.magicleap.com/"
+            target="_blank"
+            rel="noopener"
+            class="hero-link">Magic Leap</a
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </a>
-        <a href="#contact" class="btn-secondary"> Get in Touch </a>
+          and
+          <a
+            href="https://www.aboutamazon.com/news/devices/what-is-amazon-lab126"
+            target="_blank"
+            rel="noopener"
+            class="hero-link">Amazon Lab126</a
+          >.
+        </p>
+
+        <!-- Professional Path -->
+        <p class="opacity-85">
+          If you're interested in my professional journey, you can explore my
+          <a href="#about" class="hero-link">experience timeline below</a>,
+          download my
+          <a href="/resume.pdf" target="_blank" class="hero-link">resume</a>, or
+          connect with me on
+          <a
+            href="https://www.linkedin.com/in/jimmy-l-92b028112/"
+            target="_blank"
+            rel="noopener"
+            class="hero-link">LinkedIn</a
+          >.
+        </p>
+
+        <!-- Creative/Projects Path -->
+        <p class="opacity-85">
+          Outside of work, I love tinkering with <a
+            href="#projects"
+            class="hero-link">side projects</a
+          >—from web apps to creative experiments. I keep these on
+          <a
+            href="https://github.com/jimmyliuzg"
+            target="_blank"
+            rel="noopener"
+            class="hero-link">GitHub</a
+          >
+          if you'd like to browse the source or collaborate.
+        </p>
+
+        <!-- Contact/Lead Gen Path -->
+        <p class="opacity-85">
+          Want to work together, chat about autonomous vehicles, or just say
+          hello?
+          <a href="#contact" class="hero-link hero-link-emphasis"
+            >Let's get in touch</a
+          >.
+        </p>
       </div>
 
-      <!-- Scroll Indicator -->
-      <div
-        class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:block"
-      >
-        <svg
-          class="w-6 h-6 opacity-50"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-        </svg>
+      <!-- Find Me On Section -->
+      <div class="mt-12 pt-8 border-t border-black/10 dark:border-white/10">
+        <p class="text-sm font-medium opacity-60 mb-4 uppercase tracking-wider">
+          Find me on
+        </p>
+        <div class="flex flex-wrap gap-x-6 gap-y-2 text-base">
+          <a
+            href="https://github.com/jimmyliuzg"
+            target="_blank"
+            rel="noopener"
+            class="hero-link-subtle">GitHub</a
+          >
+          <a
+            href="https://www.linkedin.com/in/jimmy-l-92b028112/"
+            target="_blank"
+            rel="noopener"
+            class="hero-link-subtle">LinkedIn</a
+          >
+          <a href="mailto:jimmyliuzg@gmail.com" class="hero-link-subtle"
+            >Email</a
+          >
+        </div>
       </div>
     </div>
   </section>

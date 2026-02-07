@@ -99,6 +99,25 @@
   .timeline-dot {
     @apply absolute -left-3 top-0 w-6 h-6 rounded-full;
   }
+
+  /* Hero section link styles - inline narrative links */
+  .hero-link {
+    @apply font-semibold text-accent dark:text-accent-dark;
+    @apply underline decoration-accent/40 dark:decoration-accent-dark/40 decoration-2 underline-offset-2;
+    @apply hover:decoration-accent dark:hover:decoration-accent-dark transition-all duration-200;
+  }
+
+  .hero-link-emphasis {
+    @apply font-bold text-accent dark:text-accent-dark;
+    @apply decoration-accent dark:decoration-accent-dark decoration-2;
+    @apply hover:bg-accent/10 dark:hover:bg-accent-dark/10 px-1 -mx-1 rounded;
+  }
+
+  .hero-link-subtle {
+    @apply font-medium opacity-80 hover:opacity-100;
+    @apply underline decoration-black/20 dark:decoration-white/20 decoration-1 underline-offset-2;
+    @apply hover:decoration-accent dark:hover:decoration-accent-dark transition-all duration-200;
+  }
 }
 
 /* Utility layer styles */
