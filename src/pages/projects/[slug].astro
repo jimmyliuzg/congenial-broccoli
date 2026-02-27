@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import SinglePageLayout from '../../layouts/SinglePageLayout.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -14,9 +14,9 @@ const { project } = Astro.props;
 const { Content } = await project.render();
 ---
 
-<BaseLayout title={`${project.data.title} — Projects`}>
+<SinglePageLayout title={`${project.data.title} — Projects`}>
   
-  <article class="max-w-4xl">
+  <article class="max-w-4xl mx-auto pt-32 pb-16 px-6 md:px-12 lg:px-24">
     <h1 class="text-4xl font-bold mb-4 text-link dark:text-link-dark">
       {project.data.title}
     </h1>
@@ -49,10 +49,10 @@ const { Content } = await project.render();
           Live Site →
         </a>
       )}
-      <a href="/projects" class="text-sm underline text-link dark:text-link-dark">
+      <a href="/#projects" class="text-sm underline text-link dark:text-link-dark">
         ← Back to Projects
       </a>
     </div>
   </article>
 
-</BaseLayout>
+</SinglePageLayout>

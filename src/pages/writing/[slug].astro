@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import SinglePageLayout from '../../layouts/SinglePageLayout.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -14,9 +14,9 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<BaseLayout title={`${post.data.title} — Writing`}>
+<SinglePageLayout title={`${post.data.title} — Writing`}>
   
-  <article class="max-w-3xl">
+  <article class="max-w-3xl mx-auto pt-32 pb-16 px-6 md:px-12 lg:px-24">
     <h1 class="text-4xl font-bold mb-4 text-link dark:text-link-dark">
       {post.data.title}
     </h1>
@@ -29,8 +29,8 @@ const { Content } = await post.render();
     </div>
 
     <div class="mt-12 pt-8 border-t border-gray-300 dark:border-gray-700">
-      <a href="/writing" class="text-sm underline text-link dark:text-link-dark">← Back to Writings</a>
+      <a href="/#writing" class="text-sm underline text-link dark:text-link-dark">← Back to Writings</a>
     </div>
   </article>
 
-</BaseLayout>
+</SinglePageLayout>
