@@ -17,42 +17,333 @@ const { Content } = await project.render();
 <SinglePageLayout title={`${project.data.title} — Projects`}>
   
   <article class="max-w-4xl mx-auto pt-32 pb-16 px-6 md:px-12 lg:px-24">
-    <h1 class="text-4xl font-bold mb-4 text-link dark:text-link-dark">
-      {project.data.title}
-    </h1>
-    <p class="text-lg opacity-80 mb-8 text-light-text dark:text-dark-text">{project.data.description}</p>
-    
-    {project.data.thumbnail && (
-      <div class="mb-8">
-        <img src={project.data.thumbnail} alt={project.data.title} class="w-full object-cover" />
-      </div>
-    )}
-    
-    {project.data.demoUrl && (
-      <div class="mb-12 border border-gray-300 dark:border-gray-700">
-        <iframe src={project.data.demoUrl} class="w-full h-[600px]" title={`${project.data.title} Demo`}></iframe>
-      </div>
-    )}
-    
-    <div class="prose prose-lg dark:prose-invert max-w-none text-light-text dark:text-dark-text">
-      <Content />
-    </div>
 
-    <div class="mt-12 pt-8 border-t border-gray-300 dark:border-gray-700 flex gap-4">
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="text-sm font-mono opacity-60 mb-3 block uppercase tracking-wider">Project</span>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+        {project.data.title}
+      </h1>
+      <p class="text-lg opacity-80 leading-relaxed mb-6">{project.data.description}</p>
+      
+      <!-- Tags -->
+      {project.data.tags && project.data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2">
+          {project.data.tags.map((tag: string) => (
+            <span class="text-xs font-mono px-3 py-1 border border-secondary/40 dark:border-secondary-dark/40 text-secondary dark:text-secondary-dark">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Action Links -->
+    <div class="flex flex-wrap gap-3 mb-10 border-b border-black/10 dark:border-white/10 pb-10">
+      {project.data.demoUrl && (
+        <a
+          href={project.data.demoUrl}
+          target="_blank"
+          rel="noopener"
+          class="btn-primary text-sm"
+        >
+          View Live Demo →
+        </a>
+      )}
       {project.data.githubUrl && (
-        <a href={project.data.githubUrl} target="_blank" rel="noopener" class="text-sm underline text-link dark:text-link-dark">
-          View on GitHub →
+        <a
+          href={project.data.githubUrl}
+          target="_blank"
+          rel="noopener"
+          class="btn-secondary text-sm"
+        >
+          View Source →
         </a>
       )}
       {project.data.liveUrl && (
-        <a href={project.data.liveUrl} target="_blank" rel="noopener" class="text-sm underline text-link dark:text-link-dark">
+        <a
+          href={project.data.liveUrl}
+          target="_blank"
+          rel="noopener"
+          class="btn-secondary text-sm"
+        >
           Live Site →
         </a>
       )}
-      <a href="/#projects" class="text-sm underline text-link dark:text-link-dark">
+    </div>
+
+    <!-- Thumbnail image if no demo URL -->
+    {project.data.thumbnail && !project.data.demoUrl && (
+      <div class="mb-10">
+        <img src={project.data.thumbnail} alt={project.data.title} class="w-full object-cover border-4 border-black/10 dark:border-white/10" />
+      </div>
+    )}
+
+    <!-- Interactive Demo Embed -->
+    {project.data.demoUrl && (
+      <div class="mb-12">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-mono opacity-60 uppercase tracking-wider">Live Preview</span>
+          <a
+            href={project.data.demoUrl}
+            target="_blank"
+            rel="noopener"
+            id="open-full-btn"
+            class="text-xs font-medium text-accent dark:text-accent-dark underline underline-offset-2 hover:opacity-70 transition"
+          >
+            Open full screen ↗
+          </a>
+        </div>
+
+        <!-- iframe wrapper with fallback -->
+        <div
+          id="demo-container"
+          class="relative border-4 border-secondary/30 dark:border-secondary-dark/30 bg-light-card dark:bg-dark-card overflow-hidden"
+          style="height: 580px;"
+          data-screenshot={project.data.screenshot ?? ''}
+          data-demo-url={project.data.demoUrl}
+          data-title={project.data.title}
+        >
+          <!-- Fallback shown when iframe is blocked -->
+          <div
+            id="iframe-fallback"
+            class="absolute inset-0 flex flex-col items-center justify-center"
+            style="display: none !important;"
+          >
+            {project.data.screenshot ? (
+              <!-- Screenshot fallback with overlay CTA -->
+              <div class="relative w-full h-full">
+                <img
+                  src={project.data.screenshot}
+                  alt={`Screenshot of ${project.data.title}`}
+                  class="w-full h-full object-cover object-top"
+                />
+                <!-- Frosted overlay -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-4"
+                  style="background: rgba(0,0,0,0.45); backdrop-filter: blur(2px);">
+                  <p class="text-white text-sm font-mono uppercase tracking-widest opacity-80">Live preview blocked by browser</p>
+                  <a
+                    href={project.data.demoUrl}
+                    target="_blank"
+                    rel="noopener"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-bold text-sm hover:bg-opacity-90 transition"
+                  >
+                    Open {project.data.title} ↗
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <!-- Text-only fallback -->
+              <div class="flex flex-col items-center gap-6 p-8 text-center">
+                <div class="text-5xl">🔒</div>
+                <div>
+                  <p class="text-base font-semibold mb-2 opacity-80">Preview unavailable</p>
+                  <p class="text-sm opacity-60 mb-6 max-w-xs">
+                    This site doesn't allow embedding. Open it directly to see it in action.
+                  </p>
+                  <a
+                    href={project.data.demoUrl}
+                    target="_blank"
+                    rel="noopener"
+                    class="btn-primary text-sm"
+                  >
+                    Open {project.data.title} →
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <!-- Loading state -->
+          <div
+            id="iframe-loading"
+            class="absolute inset-0 flex items-center justify-center"
+          >
+            <span class="text-sm font-mono opacity-40 animate-pulse">Loading preview…</span>
+          </div>
+
+          <iframe
+            id="project-iframe"
+            src={project.data.demoUrl}
+            class="w-full h-full absolute inset-0"
+            title={`${project.data.title} Demo`}
+            loading="lazy"
+            allow="fullscreen"
+          ></iframe>
+        </div>
+      </div>
+    )}
+
+    <!-- Markdown Content -->
+    <div class="project-content mb-12">
+      <Content />
+    </div>
+
+    <!-- Footer Navigation -->
+    <div class="pt-8 border-t-4 border-black dark:border-white flex flex-wrap gap-4 items-center justify-between">
+      <a href="/#projects" class="text-sm font-medium text-accent dark:text-accent-dark hover:opacity-70 transition-opacity">
         ← Back to Projects
       </a>
+      <div class="flex gap-4">
+        {project.data.githubUrl && (
+          <a href={project.data.githubUrl} target="_blank" rel="noopener" class="text-sm font-medium text-accent dark:text-accent-dark underline underline-offset-2 hover:opacity-70 transition">
+            GitHub →
+          </a>
+        )}
+        {project.data.demoUrl && (
+          <a href={project.data.demoUrl} target="_blank" rel="noopener" class="text-sm font-medium text-accent dark:text-accent-dark underline underline-offset-2 hover:opacity-70 transition">
+            Live Site →
+          </a>
+        )}
+      </div>
     </div>
   </article>
 
 </SinglePageLayout>
+
+<style>
+  /* ───── Markdown / prose content styles ───── */
+  /* Scoped to .project-content so it doesn't bleed into layout */
+
+  .project-content :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(0,0,0,0.08);
+  }
+
+  :global(.dark) .project-content :global(h2) {
+    border-bottom-color: rgba(255,255,255,0.08);
+  }
+
+  .project-content :global(h3) {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-content :global(p) {
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0.85;
+    margin-bottom: 1rem;
+  }
+
+  .project-content :global(ul),
+  .project-content :global(ol) {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.85;
+  }
+
+  .project-content :global(ul) {
+    list-style-type: disc;
+  }
+
+  .project-content :global(ol) {
+    list-style-type: decimal;
+  }
+
+  .project-content :global(li) {
+    margin-bottom: 0.4rem;
+    line-height: 1.7;
+  }
+
+  .project-content :global(strong) {
+    font-weight: 700;
+    opacity: 1;
+  }
+
+  .project-content :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .project-content :global(code) {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.875em;
+    padding: 0.15em 0.4em;
+    background: rgba(0,0,0,0.06);
+    border-radius: 2px;
+  }
+
+  :global(.dark) .project-content :global(code) {
+    background: rgba(255,255,255,0.08);
+  }
+
+  .project-content :global(pre) {
+    padding: 1rem 1.25rem;
+    background: rgba(0,0,0,0.05);
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    border-left: 4px solid currentColor;
+    opacity: 0.85;
+  }
+
+  :global(.dark) .project-content :global(pre) {
+    background: rgba(255,255,255,0.04);
+  }
+
+  .project-content :global(blockquote) {
+    border-left: 4px solid rgba(0,0,0,0.2);
+    padding-left: 1rem;
+    opacity: 0.75;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  :global(.dark) .project-content :global(blockquote) {
+    border-left-color: rgba(255,255,255,0.2);
+  }
+</style>
+
+<script>
+  // Detect iframe load failure (CSP/X-Frame-Options block)
+  // Browsers don't fire 'error' on blocked iframes, but the document stays empty.
+  // We check if the iframe loaded anything after a timeout.
+  const iframe = document.getElementById('project-iframe') as HTMLIFrameElement | null;
+  const fallback = document.getElementById('iframe-fallback');
+  const loading = document.getElementById('iframe-loading');
+
+  if (iframe) {
+    // Hide loading indicator once iframe loads
+    iframe.addEventListener('load', () => {
+      loading?.remove();
+
+      // Try to detect if iframe content is accessible (same-origin) or blocked (cross-origin returns empty doc)
+      // For cross-origin we can't read contentDocument, but we can check if the iframe has navigated to about:blank
+      // which usually happens when X-Frame-Options/CSP denies embedding.
+      setTimeout(() => {
+        try {
+          // If cross-origin and blocked, contentDocument may be null or an error page
+          // This will throw a SecurityError for cross-origin — meaning it DID load (cross-origin)
+          const doc = iframe.contentDocument;
+          // If we reach here without throwing & doc is empty or null, it's blocked
+          if (!doc || !doc.body || doc.body.innerHTML.trim() === '') {
+            showFallback();
+          }
+        } catch (e) {
+          // SecurityError = cross-origin iframe loaded successfully — this is fine
+          // Do nothing; iframe is working
+        }
+      }, 3000);
+    });
+
+    // If the iframe fails to load at all
+    iframe.addEventListener('error', () => {
+      loading?.remove();
+      showFallback();
+    });
+  }
+
+  function showFallback() {
+    if (fallback && iframe) {
+      iframe.style.display = 'none';
+      fallback.style.removeProperty('display');
+      fallback.style.display = 'flex';
+    }
+  }
+</script>

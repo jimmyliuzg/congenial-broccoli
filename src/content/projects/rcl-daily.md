@@ -6,6 +6,7 @@ category: "personal"
 tags: ["Astro", "React", "TypeScript", "PWA", "IndexedDB"]
 demoUrl: "https://lectionary-daily.pages.dev/"
 githubUrl: "https://github.com/jimmyliuzg/lectionary_daily"
+screenshot: "/screenshots/rcl-daily.jpg"
 ---
 
 ## Overview

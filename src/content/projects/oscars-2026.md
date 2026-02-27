@@ -6,6 +6,7 @@ category: "personal"
 tags: ["Astro", "React", "TypeScript", "Framer Motion", "OMDb API"]
 demoUrl: "https://oscars-2026.pages.dev/"
 githubUrl: "https://github.com/jimmyliuzg/oscar2026"
+screenshot: "/screenshots/oscars-2026.jpg"
 ---
 
 ## Overview

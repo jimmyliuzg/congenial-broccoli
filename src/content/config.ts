@@ -12,6 +12,7 @@ const projects = defineCollection({
     demoUrl: z.string().url().optional(),
     githubUrl: z.string().url().optional(),
     liveUrl: z.string().url().optional(),
+    screenshot: z.string().optional(),
   }),
 });
 
