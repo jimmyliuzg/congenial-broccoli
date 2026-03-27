@@ -2,9 +2,18 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const projects = (await getCollection('projects')).sort((a, b) => 
-  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
+const allProjects = await getCollection('projects');
+
+const order = ['2:30am', 'oscars-2026', 'rcl-daily'];
+
+const projects = allProjects.sort((a, b) => {
+  const aIndex = order.indexOf(a.data.title);
+  const bIndex = order.indexOf(b.data.title);
+  if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+  if (aIndex !== -1) return -1;
+  if (bIndex !== -1) return 1;
+  return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+});
 
 const isNew = (dateStr: string) => {
   const projectDate = new Date(dateStr);
