@@ -16,36 +16,68 @@ const { Content } = await post.render();
 
 <SinglePageLayout title={`${post.data.title} — Field Notes`}>
 
-  <article class="max-w-3xl mx-auto pt-32 pb-16 px-6 md:px-12 lg:px-24">
-    <div class="mb-6">
-      <span class="text-xs px-2 py-0.5 border border-black/20 dark:border-white/20 opacity-70">
-        {post.data.theme}
-      </span>
-    </div>
-    <h1 class="text-4xl font-bold mb-4 text-link dark:text-link-dark">
-      {post.data.title}
-    </h1>
-    <time class="text-sm opacity-70 mb-8 block text-light-text dark:text-dark-text">
-      {new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-    </time>
-
-    {post.data.tags && post.data.tags.length > 0 && (
-      <div class="flex flex-wrap gap-2 mb-8">
-        {post.data.tags.map((tag: string) => (
-          <span class="text-xs px-2 py-0.5 border border-black/20 dark:border-white/20 opacity-60">
-            {tag}
-          </span>
-        ))}
+  <article class="pt-24 pb-16 px-6 md:px-12">
+    <div class="max-w-[42rem]">
+      <div class="mb-6">
+        <span class="text-xs px-2 py-0.5 border border-black/20 dark:border-white/20 opacity-70">
+          {post.data.theme}
+        </span>
       </div>
-    )}
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight text-link dark:text-link-dark">
+        {post.data.title}
+      </h1>
+      <time class="text-sm opacity-70 mb-8 block text-light-text dark:text-dark-text">
+        {new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </time>
 
-    <div class="prose prose-lg dark:prose-invert max-w-none text-light-text dark:text-dark-text">
-      <Content />
-    </div>
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mb-8">
+          {post.data.tags.map((tag: string) => (
+            <span class="text-xs px-2 py-0.5 border border-black/20 dark:border-white/20 opacity-60">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
 
-    <div class="mt-12 pt-8 border-t border-gray-300 dark:border-gray-700">
-      <a href="/journal" class="text-sm underline text-link dark:text-link-dark">← Back to Field Notes</a>
+      <div class="prose prose-lg dark:prose-invert max-w-none
+        prose-headings:font-display prose-headings:text-light-text dark:prose-headings:text-dark-text
+        prose-p:text-light-text dark:prose-p:text-dark-text prose-p:opacity-90
+        prose-strong:text-light-text dark:prose-strong:text-dark-text
+        prose-a:text-link dark:prose-a:text-link-dark prose-a:no-underline hover:prose-a:underline
+        prose-blockquote:border-l-accent dark:prose-blockquote:border-l-accent-dark
+        prose-blockquote:opacity-80
+        prose-code:text-accent dark:prose-code:text-accent-dark
+        prose-pre:bg-black/5 dark:prose-pre:bg-white/5">
+        <Content />
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-gray-300 dark:border-gray-700">
+        <a href="/journal" class="text-sm underline text-link dark:text-link-dark">← Back to Field Notes</a>
+      </div>
     </div>
   </article>
 
 </SinglePageLayout>
+
+<style>
+  /* Prose overrides for journal posts */
+  .prose :global(h2) {
+    @apply text-2xl md:text-3xl font-bold mt-12 mb-4;
+  }
+  .prose :global(h3) {
+    @apply text-xl md:text-2xl font-bold mt-8 mb-3;
+  }
+  .prose :global(p) {
+    @apply text-base md:text-lg leading-relaxed mb-6;
+  }
+  .prose :global(blockquote) {
+    @apply border-l-4 pl-6 italic my-8;
+  }
+  .prose :global(strong) {
+    @apply font-bold;
+  }
+  .prose :global(em) {
+    @apply italic;
+  }
+</style>
