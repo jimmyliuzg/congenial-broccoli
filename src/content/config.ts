@@ -25,4 +25,15 @@ const writing = defineCollection({
   }),
 });
 
-export const collections = { projects, writing };
+const journal = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.date(),
+    theme: z.string(),
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
+export const collections = { projects, writing, journal };
