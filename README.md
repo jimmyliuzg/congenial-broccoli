@@ -1,3 +1,9 @@
+---
+title: "README"
+created: 2026-03-27
+tags: [Work]
+---
+
 # Congenial Broccoli - Portfolio Site
 
 A personal portfolio and blog built with [Astro](https://astro.build), [React](https://reactjs.org), and [Tailwind CSS](https://tailwindcss.com). Created with [Google Antigravity](https://antigravity.google). The goal is to explore how AI tools can accelerate the creation of modern, production-ready web applications while maintaining design quality and code standards.
