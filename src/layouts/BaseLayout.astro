@@ -33,6 +33,12 @@ const isActive = (href: string) =>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script is:inline>
+    // Light mode default — only opt into dark when explicitly saved.
+    try {
+      if (localStorage.getItem("theme") === "dark") document.documentElement.classList.add("dark");
+    } catch (e) {}
+  </script>
 </head>
 <body class="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text font-sans leading-relaxed">
   <!-- Top Navigation — Utrecht: wordmark left, links right, red hairline -->
@@ -207,16 +213,12 @@ const isActive = (href: string) =>
       });
     });
 
-    // Initialize theme from localStorage or system preference
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      html.classList.add("dark");
-    } else if (savedTheme === "light") {
+    // Light mode default — only restore dark when explicitly saved.
+    try {
+      if (localStorage.getItem("theme") === "dark") html.classList.add("dark");
+      else html.classList.remove("dark");
+    } catch (e) {
       html.classList.remove("dark");
-    } else if (
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      html.classList.add("dark");
     }
 
     // Mobile menu toggle
