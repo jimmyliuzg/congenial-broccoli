@@ -20,6 +20,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# pi-harness tooling scaffold (local only, not site code)
+AGENTS.md
+
 # jetbrains setting folder
 .idea/
 .env
