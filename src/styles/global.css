@@ -2,143 +2,207 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base layer styles */
+/* Base layer styles — Utrecht cues: paper, signal red, hairlines, tight grotesk */
 @layer base {
 
-  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
-  /* Typography scale - consistent throughout site */
+  body {
+    font-feature-settings: "palt" 1, "kern" 1;
+    letter-spacing: -0.02em;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
   h1, h2, h3 {
     @apply font-display;
+    letter-spacing: 0.01em;
+    font-feature-settings: "palt" 1, "kern" 1;
   }
 
   h1 {
-    @apply text-5xl md:text-7xl font-bold leading-tight;
+    @apply text-4xl md:text-6xl font-bold leading-tight;
   }
 
   h2 {
-    @apply text-3xl md:text-5xl font-bold leading-tight;
+    @apply text-2xl md:text-4xl font-bold leading-tight;
   }
 
   h3 {
-    @apply text-xl md:text-2xl font-bold leading-snug;
+    @apply text-lg md:text-xl font-bold leading-snug;
   }
 
-  /* Link styling */
+  /* Signal-red links; current/hover states like Utrecht (grey hover, underline current) */
   a {
-    @apply text-accent dark:text-accent-dark transition-opacity;
+    @apply text-accent dark:text-accent-dark transition-colors duration-300;
   }
 
   a:hover {
-    @apply opacity-70;
+    @apply text-secondary dark:text-secondary-dark;
   }
 
-  /* Better focus states for accessibility */
+  a.is-current {
+    @apply underline underline-offset-4;
+  }
+
+  hr {
+    @apply border-none h-px bg-accent dark:bg-accent-dark opacity-100;
+  }
+
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-accent dark:outline-accent-dark;
   }
 
-  /* Section scroll margin to account for fixed nav */
   section[id] {
-    scroll-margin-top: 80px;
+    scroll-margin-top: 110px;
   }
 
-  /* Form input focus states with brutalist shadow */
+  /* Hairline inputs with red focus rule */
+  input,
+  textarea,
+  select {
+    @apply outline-none bg-transparent border border-accent/40 dark:border-accent-dark/40 rounded-none;
+  }
+
   input:focus,
   textarea:focus,
   select:focus {
-    @apply outline-none;
-    box-shadow: 4px 4px 0 #1E4A6B;
+    @apply outline-none border-accent dark:border-accent-dark;
+    box-shadow: none;
   }
 
-  .dark input:focus,
-  .dark textarea:focus,
-  .dark select:focus {
-    box-shadow: 4px 4px 0 #FF6B6B;
+  ::selection {
+    @apply bg-accent text-white dark:bg-accent-dark dark:text-dark-bg;
   }
 }
 
-/* Component layer styles */
+/* Component layer — Utrecht bookshop system: hairlines, pill labels, flat cards */
 @layer components {
 
-  /* Brutalist card style */
+  /* Hairline card (replaces brutalist block). Flat paper, 1px signal rule. */
   .brutalist-card {
-    @apply border-4 border-light-text dark:border-dark-text bg-light-card dark:bg-dark-card p-6;
-    @apply transition-all duration-200;
-    @apply hover:-translate-y-1;
-    @apply hover:shadow-[8px_8px_0px_0px_rgba(0, 0, 0, 1)];
-    @apply dark:hover:shadow-[8px_8px_0px_0px_rgba(255, 255, 255, 1)];
+    @apply border border-accent/40 dark:border-accent-dark/40 bg-light-card dark:bg-dark-card p-6 rounded-none;
+    @apply transition-all duration-300;
+    box-shadow: none;
   }
 
-  /* Primary button style - ONE per section */
-  .btn-primary {
-    @apply inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4;
+  .brutalist-card:hover {
+    @apply border-accent dark:border-accent-dark -translate-y-0.5;
+    box-shadow: none;
+  }
+
+  /* Utrecht pill label: 1px signal border, soft radius */
+  .utrecht-label {
+    @apply inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-[0.08em];
+    @apply border border-accent dark:border-accent-dark text-accent dark:text-accent-dark;
+    border-radius: 0.5em;
+    letter-spacing: 0.08em;
+  }
+
+  .utrecht-label-solid {
+    @apply inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-[0.08em];
     @apply bg-accent dark:bg-accent-dark text-white dark:text-dark-bg;
-    @apply font-bold text-base md:text-lg border-2 border-accent dark:border-accent-dark;
-    @apply hover:scale-105 transition-transform;
+    border-radius: 0.5em;
   }
 
-  /* Secondary button style - outlines */
+  /* Micro index label: "01 / Projects" */
+  .utrecht-index {
+    @apply text-xs font-mono uppercase tracking-[0.08em] text-accent dark:text-accent-dark mb-3 block;
+  }
+
+  /* Primary button — Utrecht cart button: solid signal block, square */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5;
+    @apply bg-accent dark:bg-accent-dark text-white dark:text-dark-bg;
+    @apply font-bold text-sm uppercase tracking-[0.08em] rounded-none;
+    @apply transition-colors duration-300;
+  }
+
+  .btn-primary:hover {
+    @apply opacity-80;
+  }
+
+  /* Secondary button — 1px signal outline, fills on hover */
   .btn-secondary {
-    @apply inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4;
-    @apply border-2 border-accent dark:border-accent-dark font-semibold text-base md:text-lg;
-    @apply text-accent dark:text-accent-dark;
-    @apply hover:bg-accent hover:text-white;
-    @apply dark:hover:bg-accent-dark dark:hover:text-dark-bg transition;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5;
+    @apply border border-accent dark:border-accent-dark font-bold text-sm uppercase tracking-[0.08em] rounded-none;
+    @apply text-accent dark:text-accent-dark transition-colors duration-300;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-accent dark:bg-accent-dark text-white dark:text-dark-bg;
+  }
+
+  /* Filter chips */
+  .filter-btn {
+    @apply rounded-none uppercase tracking-[0.08em] text-xs border border-accent/40 dark:border-accent-dark/40;
   }
 
   /* Section number indicator */
   .section-number {
-    @apply text-sm font-mono opacity-60 mb-2 block;
+    @apply text-xs font-mono uppercase tracking-[0.08em] text-accent dark:text-accent-dark mb-3 block;
   }
 
-  /* Timeline dot */
+  /* Timeline: hairline rail + signal dot */
   .timeline-dot {
-    @apply absolute -left-3 top-0 w-6 h-6 rounded-full;
+    @apply absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-accent dark:bg-accent-dark;
   }
 
-  /* Hero section link styles - inline narrative links */
+  /* Hero section link styles — signal red, underline on current/hover */
   .hero-link {
     @apply font-semibold text-accent dark:text-accent-dark;
-    @apply underline decoration-accent/40 dark:decoration-accent-dark/40 decoration-2 underline-offset-2;
-    @apply hover:decoration-accent dark:hover:decoration-accent-dark transition-all duration-200;
+    @apply underline decoration-accent/40 dark:decoration-accent-dark/40 decoration-1 underline-offset-4;
+    @apply hover:text-secondary dark:hover:text-secondary-dark transition-colors duration-300;
   }
 
   .hero-link-emphasis {
     @apply font-bold text-accent dark:text-accent-dark;
-    @apply decoration-accent dark:decoration-accent-dark decoration-2;
-    @apply hover:bg-accent/10 dark:hover:bg-accent-dark/10 px-1 -mx-1 rounded;
+    @apply underline decoration-accent dark:decoration-accent-dark decoration-1 underline-offset-4;
+    @apply hover:text-secondary dark:hover:text-secondary-dark transition-colors duration-300;
   }
 
   .hero-link-subtle {
-    @apply font-medium opacity-80 hover:opacity-100;
-    @apply underline decoration-black/20 dark:decoration-white/20 decoration-1 underline-offset-2;
-    @apply hover:decoration-accent dark:hover:decoration-accent-dark transition-all duration-200;
+    @apply font-medium text-light-text dark:text-dark-text;
+    @apply underline decoration-accent/30 dark:decoration-accent-dark/30 decoration-1 underline-offset-4;
+    @apply hover:text-accent dark:hover:text-accent-dark transition-colors duration-300;
+  }
+
+  /* Hairline rule shortcut */
+  .utrecht-rule {
+    @apply border-t border-accent dark:border-accent-dark;
+  }
+
+  /* Vertical side-rail text (Utrecht #main-side) */
+  .utrecht-vertical {
+    writing-mode: vertical-rl;
+    font-feature-settings: normal;
+    @apply text-xs font-mono tracking-[0.08em] text-accent dark:text-accent-dark;
+    white-space: nowrap;
   }
 }
 
 /* Utility layer styles */
 @layer utilities {
 
-  /* Outlined text style for logo/name */
+  /* Wordmark — Utrecht uses a solid line-art mark, not outline type */
   .outlined-text {
-    -webkit-text-stroke: 2px currentColor;
-    -webkit-text-fill-color: transparent;
-    text-stroke: 2px currentColor;
-    text-fill-color: transparent;
+    -webkit-text-stroke: 0;
+    -webkit-text-fill-color: currentColor;
+    @apply text-accent dark:text-accent-dark;
   }
 
-  /* Active nav indicator */
+  /* Active nav indicator — Utrecht underlines the current link */
   .nav-active {
-    @apply font-bold relative;
+    @apply font-bold relative text-accent dark:text-accent-dark;
   }
 
   .nav-active::after {
     content: '';
-    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-current;
+    @apply absolute bottom-0 left-0 right-0 h-px bg-accent dark:bg-accent-dark;
   }
 
   /* Glassmorphism background */
@@ -221,9 +285,9 @@
   animation-delay: 0.6s;
 }
 
-/* Project card transition states */
+/* Project card — Utrecht hover-image ease */
 .project-card {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), border-color 0.3s ease, opacity 0.3s ease;
 }
 
 /* Hide scrollbar but keep functionality */
@@ -236,7 +300,4 @@
   display: none;
 }
 
-/* Selection styling */
-::selection {
-  @apply bg-accent text-white dark:bg-accent-dark dark:text-dark-bg;
-}
+/* Selection styling lives in @layer base (signal red / paper white) */

@@ -29,19 +29,19 @@ const allPosts = [...writingPosts, ...journalPosts].sort(
     <!-- Filter Buttons -->
     <div class="flex flex-wrap gap-2 mb-10" id="writing-filters">
       <button
-        class="filter-btn px-4 py-2 text-sm font-medium border-2 transition bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
+        class="filter-btn px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.08em] border transition-colors duration-300 bg-accent dark:bg-accent-dark text-white dark:text-dark-bg border-accent dark:border-accent-dark"
         data-filter="all"
       >
         All
       </button>
       <button
-        class="filter-btn px-4 py-2 text-sm font-medium border-2 transition border-black/20 dark:border-white/20 hover:border-black dark:hover:border-white"
+        class="filter-btn px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.08em] border transition-colors duration-300 border-accent/40 dark:border-accent-dark/40 text-accent dark:text-accent-dark hover:bg-accent hover:text-white dark:hover:bg-accent-dark dark:hover:text-dark-bg"
         data-filter="writing"
       >
         Writing
       </button>
       <button
-        class="filter-btn px-4 py-2 text-sm font-medium border-2 transition border-black/20 dark:border-white/20 hover:border-black dark:hover:border-white"
+        class="filter-btn px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.08em] border transition-colors duration-300 border-accent/40 dark:border-accent-dark/40 text-accent dark:text-accent-dark hover:bg-accent hover:text-white dark:hover:bg-accent-dark dark:hover:text-dark-bg"
         data-filter="field-notes"
       >
         Field Notes
@@ -65,7 +65,7 @@ const allPosts = [...writingPosts, ...journalPosts].sort(
 
           return (
             <article
-              class="group border-l-4 border-black dark:border-white pl-6 py-6 hover:bg-black/5 dark:hover:bg-white/5 transition"
+              class="group border-l border-accent dark:border-accent-dark pl-6 py-6 hover:bg-accent/5 dark:hover:bg-accent-dark/5 transition"
               data-type={post.type}
             >
               <div class="flex items-start justify-between gap-4">
@@ -75,7 +75,7 @@ const allPosts = [...writingPosts, ...journalPosts].sort(
                       {formattedDate}
                     </time>
                     {isJournal && (
-                      <span class="text-xs px-2 py-0.5 border border-black/20 dark:border-white/20 opacity-70 font-medium">
+                      <span class="text-xs px-2 py-0.5 border border-accent/40 dark:border-accent-dark/40 opacity-70 font-medium">
                         Field Notes
                       </span>
                     )}
@@ -113,24 +113,24 @@ const allPosts = [...writingPosts, ...journalPosts].sort(
       // Update button styles
       filterBtns.forEach((b) => {
         b.classList.remove(
-          "bg-black",
-          "dark:bg-white",
+          "bg-accent",
+          "dark:bg-accent-dark",
           "text-white",
-          "dark:text-black",
-          "border-black",
-          "dark:border-white"
+          "dark:text-dark-bg",
+          "border-accent",
+          "dark:border-accent-dark"
         );
-        b.classList.add("border-black/20", "dark:border-white/20");
+        b.classList.add("border-accent/40", "dark:border-accent-dark/40");
       });
       btn.classList.add(
-        "bg-black",
-        "dark:bg-white",
+        "bg-accent",
+        "dark:bg-accent-dark",
         "text-white",
-        "dark:text-black",
-        "border-black",
-        "dark:border-white"
+        "dark:text-dark-bg",
+        "border-accent",
+        "dark:border-accent-dark"
       );
-      btn.classList.remove("border-black/20", "dark:border-white/20");
+      btn.classList.remove("border-accent/40", "dark:border-accent-dark/40");
 
       // Filter posts
       posts.forEach((post) => {

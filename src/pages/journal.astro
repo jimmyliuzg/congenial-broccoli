@@ -34,14 +34,14 @@ const posts = (await getCollection("journal")).sort(
           });
 
           return (
-            <article class="group border-l-4 border-black dark:border-white pl-6 py-6 hover:bg-black/5 dark:hover:bg-white/5 transition">
+            <article class="group border-l border-accent dark:border-accent-dark pl-6 py-6 hover:bg-accent/5 dark:hover:bg-accent-dark/5 transition">
               <div class="flex items-start justify-between gap-4">
                 <div class="flex-1">
                   <div class="flex items-center gap-3 mb-2">
                     <time class="text-sm font-mono opacity-60">
                       {formattedDate}
                     </time>
-                    <span class="text-xs px-2 py-0.5 border border-black/20 dark:border-white/20 opacity-70">
+                    <span class="text-xs px-2 py-0.5 border border-accent/40 dark:border-accent-dark/40 opacity-70">
                       {post.data.theme}
                     </span>
                   </div>
@@ -54,7 +54,7 @@ const posts = (await getCollection("journal")).sort(
                   {post.data.tags && post.data.tags.length > 0 && (
                     <div class="flex flex-wrap gap-2 mt-3">
                       {post.data.tags.map((tag: string) => (
-                        <span class="text-xs px-2 py-0.5 border border-black/10 dark:border-white/10 opacity-60">
+                        <span class="text-xs px-2 py-0.5 border border-accent/40 dark:border-accent-dark/40 opacity-60">
                           {tag}
                         </span>
                       ))}
@@ -76,7 +76,7 @@ const posts = (await getCollection("journal")).sort(
 
     {
       posts.length === 0 && (
-        <div class="text-center py-16 border-4 border-dashed border-black/20 dark:border-white/20">
+        <div class="text-center py-16 border border-dashed border-accent/40 dark:border-accent-dark/40">
           <p class="text-lg opacity-60">No entries yet. Check back tomorrow.</p>
         </div>
       )

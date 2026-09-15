@@ -31,40 +31,36 @@ const navLinks = [
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display:wght@400;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
             rel="stylesheet"
         />
     </head>
     <body
         class="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text font-sans leading-relaxed"
     >
-        <!-- Fixed Navigation -->
+        <!-- Fixed Navigation — Utrecht: paper bar, space-between groups, red hairline -->
         <nav
             id="main-nav"
-            class="fixed top-0 left-0 right-0 z-50 bg-light-bg/95 dark:bg-dark-bg/95 backdrop-blur-sm border-b border-black/10 dark:border-white/10 transition-transform duration-300"
+            class="fixed top-0 left-0 right-0 z-50 bg-light-bg dark:bg-dark-bg transition-transform duration-300"
         >
             <div
-                class="max-w-6xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center"
+                class="max-w-6xl mx-auto px-5 md:px-10 pt-4 pb-3 flex justify-between items-baseline gap-6"
             >
                 <a
                     href={isHomepage ? "#hero" : "/"}
-                    class="text-xl md:text-2xl font-bold hover:opacity-70 transition-opacity"
+                    class="text-lg md:text-xl font-bold tracking-[0.01em] text-accent dark:text-accent-dark hover:text-secondary dark:hover:text-secondary-dark transition-colors"
                 >
                     Jimmy Liu
                 </a>
 
                 <!-- Desktop Navigation -->
-                <ul class="hidden md:flex gap-8 text-sm font-medium">
+                <ul class="hidden md:flex gap-6 text-xs font-medium uppercase tracking-[0.08em]">
                     {
                         navLinks.map((link) => (
                             <li>
                                 <a
                                     href={link.href}
-                                    class="nav-link relative py-2 hover:opacity-70 transition-opacity uppercase tracking-wider"
+                                    class="nav-link relative py-1 text-light-text dark:text-dark-text hover:text-accent dark:hover:text-accent-dark transition-colors"
                                     data-section={link.href.replace(/^\/?#/, "")}
                                 >
                                     {link.label}
@@ -74,12 +70,28 @@ const navLinks = [
                     }
                 </ul>
 
-                <!-- Mobile Menu Button + Dark Mode Toggle -->
-                <div class="flex items-center gap-3">
+                <!-- Social + Dark Mode Toggle -->
+                <div class="flex items-center gap-4 text-xs font-medium uppercase tracking-[0.08em]">
+                    <a
+                        href="https://github.com/jimmyliuzg"
+                        target="_blank"
+                        rel="noopener"
+                        class="hidden sm:inline text-light-text dark:text-dark-text hover:text-accent dark:hover:text-accent-dark transition-colors"
+                    >
+                        GitHub
+                    </a>
+                    <a
+                        href="https://www.linkedin.com/in/jimmy-l-92b028112/"
+                        target="_blank"
+                        rel="noopener"
+                        class="hidden sm:inline text-light-text dark:text-dark-text hover:text-accent dark:hover:text-accent-dark transition-colors"
+                    >
+                        LinkedIn
+                    </a>
                     <button
                         data-dark-toggle
                         aria-label="Toggle Dark Mode"
-                        class="p-2 border-2 border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition text-sm"
+                        class="px-2.5 py-1 border border-accent dark:border-accent-dark text-accent dark:text-accent-dark hover:bg-accent hover:text-white dark:hover:bg-accent-dark dark:hover:text-dark-bg transition-colors text-[11px] font-bold"
                     >
                         ☀/☾
                     </button>
@@ -87,11 +99,11 @@ const navLinks = [
                     <!-- Mobile Menu Button -->
                     <button
                         id="mobile-menu-btn"
-                        class="md:hidden p-2 border-2 border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"
+                        class="md:hidden px-2.5 py-1 border border-accent dark:border-accent-dark text-accent dark:text-accent-dark"
                         aria-label="Toggle menu"
                     >
                         <svg
-                            class="w-5 h-5"
+                            class="w-4 h-4"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -99,17 +111,20 @@ const navLinks = [
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                stroke-width="2"
+                                stroke-width="1.5"
                                 d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
                 </div>
             </div>
+            <div class="max-w-6xl mx-auto px-5 md:px-10">
+                <div class="border-t border-accent dark:border-accent-dark"></div>
+            </div>
 
             <!-- Mobile Menu -->
             <div
                 id="mobile-menu"
-                class="hidden md:hidden border-t border-black/10 dark:border-white/10 bg-light-bg dark:bg-dark-bg"
+                class="hidden md:hidden border-t border-accent/40 dark:border-accent-dark/40 bg-light-bg dark:bg-dark-bg"
             >
                 <ul class="flex flex-col py-4">
                     {
@@ -129,15 +144,59 @@ const navLinks = [
             </div>
         </nav>
 
-        <!-- Main Content -->
-        <main>
-            <slot />
-        </main>
+        <!-- Main Content with Utrecht side rail -->
+        <div class="max-w-6xl mx-auto px-5 md:px-10 flex gap-10">
+            <aside class="hidden lg:flex justify-center pt-32 shrink-0" aria-hidden="true">
+                <p class="utrecht-vertical">
+                    Jimmy Liu / Technical Program Manager — NVIDIA / Bay Area, CA
+                </p>
+            </aside>
+            <main class="flex-1 min-w-0">
+                <slot />
+            </main>
+        </div>
+
+        <!-- Footer — Utrecht inverted signal block -->
+        <footer class="mt-24 bg-accent dark:bg-accent-dark text-white dark:text-dark-bg">
+            <div class="max-w-6xl mx-auto px-5 md:px-10 py-10 flex flex-col md:flex-row gap-8 md:items-start md:justify-between">
+                <div class="max-w-xs">
+                    <p class="font-bold text-lg leading-tight">Jimmy Liu</p>
+                    <p class="mt-2 text-sm opacity-90 leading-relaxed">
+                        Technical Program Manager, ML Operations — NVIDIA.<br />
+                        Bay Area, CA
+                    </p>
+                </div>
+                <nav class="text-xs font-medium uppercase tracking-[0.08em]">
+                    <ul class="flex flex-wrap gap-x-6 gap-y-2">
+                        {
+                            navLinks.map((link) => (
+                                <li>
+                                    <a href={link.href} class="text-white dark:text-dark-bg hover:opacity-70 transition-opacity">
+                                        {link.label}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                    <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2 opacity-90">
+                        <li><a href="https://github.com/jimmyliuzg" target="_blank" rel="noopener" class="text-white dark:text-dark-bg hover:opacity-70 transition-opacity">GitHub</a></li>
+                        <li><a href="https://www.linkedin.com/in/jimmy-l-92b028112/" target="_blank" rel="noopener" class="text-white dark:text-dark-bg hover:opacity-70 transition-opacity">LinkedIn</a></li>
+                        <li><a href="mailto:jimmyliuzg@gmail.com" class="text-white dark:text-dark-bg hover:opacity-70 transition-opacity">Email</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="border-t border-white/40 dark:border-dark-bg/30">
+                <div class="max-w-6xl mx-auto px-5 md:px-10 py-4 flex justify-between text-[11px] uppercase tracking-[0.08em] opacity-90">
+                    <span>© {new Date().getFullYear()} Jimmy Liu</span>
+                    <a href="#hero" class="text-white dark:text-dark-bg hover:opacity-70 transition-opacity">Back to top ↑</a>
+                </div>
+            </div>
+        </footer>
 
         <!-- Back to Top Button -->
         <button
             id="back-to-top"
-            class="fixed bottom-8 right-8 w-12 h-12 bg-black dark:bg-white text-white dark:text-black border-2 border-black dark:border-white opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 z-40 flex items-center justify-center"
+            class="fixed bottom-8 right-8 w-11 h-11 bg-accent dark:bg-accent-dark text-white dark:text-dark-bg opacity-0 pointer-events-none transition-all duration-300 hover:opacity-80 z-40 flex items-center justify-center rounded-none"
             aria-label="Back to top"
         >
             <svg

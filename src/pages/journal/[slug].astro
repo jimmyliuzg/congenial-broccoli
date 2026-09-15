@@ -19,7 +19,7 @@ const { Content } = await post.render();
   <article class="pt-24 pb-16 px-6 md:px-12">
     <div class="max-w-[42rem]">
       <div class="mb-6">
-        <span class="text-xs px-2 py-0.5 border border-black/20 dark:border-white/20 opacity-70">
+        <span class="text-xs px-2 py-0.5 border border-accent/40 dark:border-accent-dark/40 opacity-70">
           {post.data.theme}
         </span>
       </div>
@@ -33,7 +33,7 @@ const { Content } = await post.render();
       {post.data.tags && post.data.tags.length > 0 && (
         <div class="flex flex-wrap gap-2 mb-8">
           {post.data.tags.map((tag: string) => (
-            <span class="text-xs px-2 py-0.5 border border-black/20 dark:border-white/20 opacity-60">
+            <span class="text-xs px-2 py-0.5 border border-accent/40 dark:border-accent-dark/40 opacity-60">
               {tag}
             </span>
           ))}
@@ -48,7 +48,7 @@ const { Content } = await post.render();
         prose-blockquote:border-l-accent dark:prose-blockquote:border-l-accent-dark
         prose-blockquote:opacity-80
         prose-code:text-accent dark:prose-code:text-accent-dark
-        prose-pre:bg-black/5 dark:prose-pre:bg-white/5">
+        prose-pre:bg-accent/5 dark:prose-pre:bg-accent-dark/5">
         <Content />
       </div>
 
@@ -72,7 +72,7 @@ const { Content } = await post.render();
     @apply text-base md:text-lg leading-relaxed mb-6;
   }
   .prose :global(blockquote) {
-    @apply border-l-4 pl-6 italic my-8;
+    @apply border-l pl-6 italic my-8;
   }
   .prose :global(strong) {
     @apply font-bold;

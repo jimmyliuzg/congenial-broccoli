@@ -39,7 +39,7 @@ const { Content } = await project.render();
     </header>
 
     <!-- Action Links -->
-    <div class="flex flex-wrap gap-3 mb-10 border-b border-black/10 dark:border-white/10 pb-10">
+    <div class="flex flex-wrap gap-3 mb-10 border-b border-accent/40 dark:border-accent-dark/40 pb-10">
       {project.data.demoUrl && (
         <a
           href={project.data.demoUrl}
@@ -75,7 +75,7 @@ const { Content } = await project.render();
     <!-- Thumbnail image if no demo URL -->
     {project.data.thumbnail && !project.data.demoUrl && (
       <div class="mb-10">
-        <img src={project.data.thumbnail} alt={project.data.title} class="w-full object-cover border-4 border-black/10 dark:border-white/10" />
+        <img src={project.data.thumbnail} alt={project.data.title} class="w-full object-cover border border-accent/40 dark:border-accent-dark/40" />
       </div>
     )}
 
@@ -98,7 +98,7 @@ const { Content } = await project.render();
         <!-- iframe wrapper with fallback -->
         <div
           id="demo-container"
-          class="relative border-4 border-secondary/30 dark:border-secondary-dark/30 bg-light-card dark:bg-dark-card overflow-hidden"
+          class="relative border border-secondary/30 dark:border-secondary-dark/30 bg-light-card dark:bg-dark-card overflow-hidden"
           style="height: 580px;"
           data-screenshot={project.data.screenshot ?? ''}
           data-demo-url={project.data.demoUrl}
@@ -180,7 +180,7 @@ const { Content } = await project.render();
     </div>
 
     <!-- Footer Navigation -->
-    <div class="pt-8 border-t-4 border-black dark:border-white flex flex-wrap gap-4 items-center justify-between">
+    <div class="pt-8 border-t border-accent dark:border-accent-dark flex flex-wrap gap-4 items-center justify-between">
       <a href="/#projects" class="text-sm font-medium text-accent dark:text-accent-dark hover:opacity-70 transition-opacity">
         ← Back to Projects
       </a>

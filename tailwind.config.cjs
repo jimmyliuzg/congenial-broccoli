@@ -7,37 +7,39 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['Courier Prime', 'monospace'],
-        sans: ['Be Vietnam Pro', 'system-ui', 'sans-serif'],
-        display: ['Momo Trust Display', 'system-ui', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'Courier Prime', 'monospace'],
+        sans: ['"Space Grotesk"', 'GT America Standard', 'Helvetica Neue', 'Helvetica', 'Yu Gothic', 'YuGothic', 'Hiragino Sans', 'system-ui', 'sans-serif'],
+        display: ['"Space Grotesk"', 'GT America Standard', 'Helvetica Neue', 'Helvetica', 'Yu Gothic', 'system-ui', 'sans-serif'],
       },
       colors: {
-        // Light mode colors
+        // Light mode — Utrecht paper white + signal red
         light: {
-          bg: '#F9F6F0',      // Off-white/Bone
-          text: '#1A1A1A',    // Near black for readability
-          card: '#FFFFFF',    // Pure white for cards
+          bg: '#FFFFFF',      // Paper
+          text: '#111111',    // Near-black ink
+          card: '#FFFFFF',    // Flat paper cards
+          muted: '#6E6E6E',   // Utrecht hover-grey analogue
         },
-        // Dark mode colors  
+        // Dark mode — inverted paper, vermillion stays signal
         dark: {
-          bg: '#1A1A1A',      // Deep charcoal
-          text: '#F9F6F0',    // Off-white for text
-          card: '#2A2A2A',    // Slightly lighter for cards
+          bg: '#111111',      // Deep ink
+          text: '#F5F2EB',    // Warm paper text
+          card: '#161616',    // Flat raised paper
+          muted: '#A8A8A8',
         },
-        // Accent colors - Navy Blue for light mode
+        // Signal red — Utrecht vermillion #DB0000
         accent: {
-          DEFAULT: '#2C5F7F', // Slate Blue (light mode) - more legible
-          dark: '#FF6B6B',    // Coral (dark mode contrast)
+          DEFAULT: '#DB0000', // Signal red (light mode rules/links/labels)
+          dark: '#FF4D42',    // Brightened vermillion for dark-mode contrast
         },
-        // Secondary accent - Darker Slate for better visibility
+        // Utrecht hover grey
         secondary: {
-          DEFAULT: '#556B7C', // Darker Slate (light mode) - more visible for borders
-          dark: '#87CEEB',    // Sky Blue (dark mode contrast)
+          DEFAULT: '#999999',
+          dark: '#8A8A8A',
         },
-        // Link color (kept for compatibility)
+        // Link color mirrors signal red
         link: {
-          DEFAULT: '#2C5F7F', // Slate Blue for light mode  
-          dark: '#FF6B6B',    // Coral for dark mode
+          DEFAULT: '#DB0000',
+          dark: '#FF4D42',
         },
 
       },
