@@ -35,10 +35,8 @@ All commands are run from the root of the project, from a terminal:
 
 ## 📦 Deployment
 
-This project is configured for **Cloudflare Pages**.
+This project is a static Astro site hosted on **GitHub Pages**
+(`https://jimmyliuzg.github.io/`).
 
-1. Connect your repository to Cloudflare Pages.
-2. Use the following build settings:
-   - **Framework Preset**: Astro
-   - **Build Command**: `npm run build`
-   - **Build Output Directory**: `dist`
+Deploys run automatically via `.github/workflows/deploy.yml`
+(build + `actions/deploy-pages`) on every push to `main`.
