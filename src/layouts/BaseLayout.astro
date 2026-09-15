@@ -1,5 +1,5 @@
 ---
-import Sidebar from '../components/Sidebar.astro';
+import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -8,6 +8,20 @@ interface Props {
 }
 
 const { title, description = "Portfolio & Resume" } = Astro.props;
+
+const pathname = Astro.url.pathname;
+
+const pageLinks = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Projects", href: "/projects" },
+  { label: "Writing", href: "/writing" },
+  { label: "Journal", href: "/journal" },
+  { label: "Contact", href: "/contact" },
+];
+
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
 
 <!DOCTYPE html>
@@ -22,35 +36,205 @@ const { title, description = "Portfolio & Resume" } = Astro.props;
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body class="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text font-sans leading-relaxed">
-  <div class="min-h-screen flex flex-col md:flex-row">
-    <!-- Sidebar -->
-    <div class="w-full md:w-80 lg:w-96 flex-shrink-0 border-b md:border-b-0 md:border-r border-accent/40 dark:border-accent-dark/40 p-6 md:p-8">
-      <Sidebar />
+  <!-- Top Navigation — Utrecht: wordmark left, links right, red hairline -->
+  <nav
+    id="main-nav"
+    class="fixed top-0 left-0 right-0 z-50 bg-light-bg dark:bg-dark-bg transition-transform duration-300"
+  >
+    <div class="max-w-6xl mx-auto px-5 md:px-10 pt-4 pb-3 flex justify-between items-baseline gap-6">
+      <a
+        href="/"
+        class="text-lg md:text-xl font-bold tracking-[0.01em] text-accent dark:text-accent-dark hover:text-secondary dark:hover:text-secondary-dark transition-colors shrink-0"
+      >
+        Jimmy Liu
+      </a>
+
+      <!-- Right-aligned link cluster -->
+      <div class="flex items-baseline gap-6">
+        <!-- Desktop Navigation -->
+        <ul class="hidden md:flex gap-6 text-xs font-medium uppercase tracking-[0.08em]">
+          {
+            pageLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  class={`relative py-1 transition-colors ${isActive(link.href) ? "is-current font-bold" : "text-light-text dark:text-dark-text hover:text-accent dark:hover:text-accent-dark"}`}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <!-- Social + Dark Mode Toggle -->
+        <div class="flex items-center gap-4 text-xs font-medium uppercase tracking-[0.08em]">
+          <a
+            href="https://github.com/jimmyliuzg"
+            target="_blank"
+            rel="noopener"
+            class="hidden sm:inline text-light-text dark:text-dark-text hover:text-accent dark:hover:text-accent-dark transition-colors"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/jimmy-l-92b028112/"
+            target="_blank"
+            rel="noopener"
+            class="hidden sm:inline text-light-text dark:text-dark-text hover:text-accent dark:hover:text-accent-dark transition-colors"
+          >
+            LinkedIn
+          </a>
+          <button
+            data-dark-toggle
+            aria-label="Toggle Dark Mode"
+            class="px-2.5 py-1 border border-accent dark:border-accent-dark text-accent dark:text-accent-dark hover:bg-accent hover:text-white dark:hover:bg-accent-dark dark:hover:text-dark-bg transition-colors text-[11px] font-bold"
+          >
+            ☀/☾
+          </button>
+
+          <!-- Mobile Menu Button -->
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden px-2.5 py-1 border border-accent dark:border-accent-dark text-accent dark:text-accent-dark"
+            aria-label="Toggle menu"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
-    
-    <!-- Main Content -->
-    <main class="flex-1 p-6 md:p-8 md:pl-12 lg:pl-16">
+    <div class="max-w-6xl mx-auto px-5 md:px-10">
+      <div class="border-t border-accent dark:border-accent-dark"></div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="hidden md:hidden border-t border-accent/40 dark:border-accent-dark/40 bg-light-bg dark:bg-dark-bg"
+    >
+      <ul class="flex flex-col py-4">
+        {
+          pageLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                aria-current={isActive(link.href) ? "page" : undefined}
+                class={`block px-6 py-3 uppercase tracking-wider text-sm font-medium ${isActive(link.href) ? "text-accent dark:text-accent-dark font-bold" : ""}`}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content with Utrecht side rail -->
+  <div class="max-w-6xl mx-auto px-5 md:px-10 flex gap-10 pt-28 md:pt-32 pb-4">
+    <aside class="hidden lg:flex justify-center shrink-0" aria-hidden="true">
+      <p class="utrecht-vertical">
+        Jimmy Liu / Technical Program Manager — NVIDIA / Bay Area, CA
+      </p>
+    </aside>
+    <main class="flex-1 min-w-0">
       <slot />
     </main>
   </div>
-  
+
+  <Footer />
+
+  <!-- Back to Top Button -->
+  <button
+    id="back-to-top"
+    class="fixed bottom-8 right-8 w-11 h-11 bg-accent dark:bg-accent-dark text-white dark:text-dark-bg opacity-0 pointer-events-none transition-all duration-300 hover:opacity-80 z-40 flex items-center justify-center rounded-none"
+    aria-label="Back to top"
+  >
+    <svg
+      class="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M5 15l7-7 7 7"></path>
+    </svg>
+  </button>
+
   <script is:inline>
     // Dark mode toggle logic
-    const toggleBtn = document.querySelector('[data-dark-toggle]');
+    const toggleBtns = document.querySelectorAll("[data-dark-toggle]");
     const html = document.documentElement;
-    
-    toggleBtn?.addEventListener('click', () => {
-      html.classList.toggle('dark');
-      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+
+    toggleBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        html.classList.toggle("dark");
+        localStorage.setItem(
+          "theme",
+          html.classList.contains("dark") ? "dark" : "light",
+        );
+      });
     });
-    
-    // Initialize theme from localStorage
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      html.classList.add('dark');
-    } else if (savedTheme === 'light') {
-      html.classList.remove('dark');
+
+    // Initialize theme from localStorage or system preference
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      html.classList.add("dark");
+    } else if (savedTheme === "light") {
+      html.classList.remove("dark");
+    } else if (
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      html.classList.add("dark");
     }
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    mobileMenuBtn?.addEventListener("click", () => {
+      mobileMenu?.classList.toggle("hidden");
+    });
+
+    // Close mobile menu when clicking a link
+    mobileMenu?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+      });
+    });
+
+    // Back to top button visibility
+    const backToTop = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 500) {
+        backToTop?.classList.remove("opacity-0", "pointer-events-none");
+        backToTop?.classList.add("opacity-100", "pointer-events-auto");
+      } else {
+        backToTop?.classList.add("opacity-0", "pointer-events-none");
+        backToTop?.classList.remove("opacity-100", "pointer-events-auto");
+      }
+    });
+
+    backToTop?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   </script>
 </body>
 </html>

@@ -7,7 +7,7 @@ const posts = (await getCollection("journal")).sort(
 );
 ---
 
-<BaseLayout title="Journal — Hermes Agent">
+<BaseLayout title="Field Notes — Jimmy Liu">
   <div class="max-w-3xl">
     <div class="mb-12">
       <h1 class="text-4xl font-bold mb-4 text-link dark:text-link-dark">
@@ -20,6 +20,11 @@ const posts = (await getCollection("journal")).sort(
       <p class="text-sm opacity-60">
         Every post is auto-generated from the day's real activities — no
         fabrications, just reorganized chaos.
+      </p>
+      <p class="text-sm mt-3">
+        <a href="/writing" class="underline font-medium">← All writing</a>
+        <span class="opacity-40 mx-2">/</span>
+        <span class="opacity-60">essays + notes in one stream</span>
       </p>
     </div>
 

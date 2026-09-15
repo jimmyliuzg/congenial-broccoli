@@ -83,18 +83,6 @@
 /* Component layer — Utrecht bookshop system: hairlines, pill labels, flat cards */
 @layer components {
 
-  /* Hairline card (replaces brutalist block). Flat paper, 1px signal rule. */
-  .brutalist-card {
-    @apply border border-accent/40 dark:border-accent-dark/40 bg-light-card dark:bg-dark-card p-6 rounded-none;
-    @apply transition-all duration-300;
-    box-shadow: none;
-  }
-
-  .brutalist-card:hover {
-    @apply border-accent dark:border-accent-dark -translate-y-0.5;
-    box-shadow: none;
-  }
-
   /* Utrecht pill label: 1px signal border, soft radius */
   .utrecht-label {
     @apply inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-[0.08em];
@@ -142,11 +130,6 @@
     @apply rounded-none uppercase tracking-[0.08em] text-xs border border-accent/40 dark:border-accent-dark/40;
   }
 
-  /* Section number indicator */
-  .section-number {
-    @apply text-xs font-mono uppercase tracking-[0.08em] text-accent dark:text-accent-dark mb-3 block;
-  }
-
   /* Timeline: hairline rail + signal dot */
   .timeline-dot {
     @apply absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-accent dark:bg-accent-dark;
@@ -171,11 +154,6 @@
     @apply hover:text-accent dark:hover:text-accent-dark transition-colors duration-300;
   }
 
-  /* Hairline rule shortcut */
-  .utrecht-rule {
-    @apply border-t border-accent dark:border-accent-dark;
-  }
-
   /* Vertical side-rail text (Utrecht #main-side) */
   .utrecht-vertical {
     writing-mode: vertical-rl;
@@ -185,119 +163,13 @@
   }
 }
 
-/* Utility layer styles */
+/* Utility layer styles — kept empty; utilities live in components/base. */
 @layer utilities {
-
-  /* Wordmark — Utrecht uses a solid line-art mark, not outline type */
-  .outlined-text {
-    -webkit-text-stroke: 0;
-    -webkit-text-fill-color: currentColor;
-    @apply text-accent dark:text-accent-dark;
-  }
-
-  /* Active nav indicator — Utrecht underlines the current link */
-  .nav-active {
-    @apply font-bold relative text-accent dark:text-accent-dark;
-  }
-
-  .nav-active::after {
-    content: '';
-    @apply absolute bottom-0 left-0 right-0 h-px bg-accent dark:bg-accent-dark;
-  }
-
-  /* Glassmorphism background */
-  .glass-bg {
-    @apply bg-light-bg/95 dark:bg-dark-bg/95 backdrop-blur-sm;
-  }
-}
-
-/* Animations */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes bounce-slow {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
-}
-
-.animate-slide-up {
-  animation: slide-up 0.8s ease-out forwards;
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 3s ease-in-out infinite;
-}
-
-/* Staggered animation delays for lists */
-.stagger-1 {
-  animation-delay: 0.1s;
-}
-
-.stagger-2 {
-  animation-delay: 0.2s;
-}
-
-.stagger-3 {
-  animation-delay: 0.3s;
-}
-
-.stagger-4 {
-  animation-delay: 0.4s;
-}
-
-.stagger-5 {
-  animation-delay: 0.5s;
-}
-
-.stagger-6 {
-  animation-delay: 0.6s;
 }
 
 /* Project card — Utrecht hover-image ease */
 .project-card {
   transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), border-color 0.3s ease, opacity 0.3s ease;
-}
-
-/* Hide scrollbar but keep functionality */
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
 }
 
 /* Selection styling lives in @layer base (signal red / paper white) */

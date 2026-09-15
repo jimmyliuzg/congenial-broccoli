@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import react from '@astrojs/react';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
@@ -9,7 +8,6 @@ export default defineConfig({
       configFile: './tailwind.config.cjs',
       applyBaseStyles: true
     }),
-    react()
   ],
   output: 'static',
   adapter: cloudflare(),

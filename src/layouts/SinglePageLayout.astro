@@ -1,4 +1,5 @@
 ---
+import Footer from '../components/Footer.astro';
 import "../styles/global.css";
 
 interface Props {
@@ -17,6 +18,7 @@ const navLinks = [
     { label: "Projects", href: isHomepage ? "#projects" : "/#projects" },
     { label: "About", href: isHomepage ? "#about" : "/#about" },
     { label: "Writing", href: isHomepage ? "#writing" : "/writing" },
+    { label: "Journal", href: "/journal" },
     { label: "Contact", href: isHomepage ? "#contact" : "/#contact" },
 ];
 ---
@@ -48,11 +50,13 @@ const navLinks = [
             >
                 <a
                     href={isHomepage ? "#hero" : "/"}
-                    class="text-lg md:text-xl font-bold tracking-[0.01em] text-accent dark:text-accent-dark hover:text-secondary dark:hover:text-secondary-dark transition-colors"
+                    class="text-lg md:text-xl font-bold tracking-[0.01em] text-accent dark:text-accent-dark hover:text-secondary dark:hover:text-secondary-dark transition-colors shrink-0"
                 >
                     Jimmy Liu
                 </a>
 
+                <!-- Right-aligned link cluster -->
+                <div class="flex items-baseline gap-6">
                 <!-- Desktop Navigation -->
                 <ul class="hidden md:flex gap-6 text-xs font-medium uppercase tracking-[0.08em]">
                     {
@@ -116,6 +120,7 @@ const navLinks = [
                         </svg>
                     </button>
                 </div>
+                </div>
             </div>
             <div class="max-w-6xl mx-auto px-5 md:px-10">
                 <div class="border-t border-accent dark:border-accent-dark"></div>
@@ -156,42 +161,7 @@ const navLinks = [
             </main>
         </div>
 
-        <!-- Footer — Utrecht inverted signal block -->
-        <footer class="mt-24 bg-accent dark:bg-accent-dark text-white dark:text-dark-bg">
-            <div class="max-w-6xl mx-auto px-5 md:px-10 py-10 flex flex-col md:flex-row gap-8 md:items-start md:justify-between">
-                <div class="max-w-xs">
-                    <p class="font-bold text-lg leading-tight">Jimmy Liu</p>
-                    <p class="mt-2 text-sm opacity-90 leading-relaxed">
-                        Technical Program Manager, ML Operations — NVIDIA.<br />
-                        Bay Area, CA
-                    </p>
-                </div>
-                <nav class="text-xs font-medium uppercase tracking-[0.08em]">
-                    <ul class="flex flex-wrap gap-x-6 gap-y-2">
-                        {
-                            navLinks.map((link) => (
-                                <li>
-                                    <a href={link.href} class="text-white dark:text-dark-bg hover:opacity-70 transition-opacity">
-                                        {link.label}
-                                    </a>
-                                </li>
-                            ))
-                        }
-                    </ul>
-                    <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2 opacity-90">
-                        <li><a href="https://github.com/jimmyliuzg" target="_blank" rel="noopener" class="text-white dark:text-dark-bg hover:opacity-70 transition-opacity">GitHub</a></li>
-                        <li><a href="https://www.linkedin.com/in/jimmy-l-92b028112/" target="_blank" rel="noopener" class="text-white dark:text-dark-bg hover:opacity-70 transition-opacity">LinkedIn</a></li>
-                        <li><a href="mailto:jimmyliuzg@gmail.com" class="text-white dark:text-dark-bg hover:opacity-70 transition-opacity">Email</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="border-t border-white/40 dark:border-dark-bg/30">
-                <div class="max-w-6xl mx-auto px-5 md:px-10 py-4 flex justify-between text-[11px] uppercase tracking-[0.08em] opacity-90">
-                    <span>© {new Date().getFullYear()} Jimmy Liu</span>
-                    <a href="#hero" class="text-white dark:text-dark-bg hover:opacity-70 transition-opacity">Back to top ↑</a>
-                </div>
-            </div>
-        </footer>
+        <Footer topHref={isHomepage ? "#hero" : "/"} />
 
         <!-- Back to Top Button -->
         <button

@@ -536,6 +536,10 @@ const categories = ["All", "Personal", "Experimental", "Technical"];
             <a href="/writing" class="text-sm underline font-medium hover:opacity-70">
               View all writing →
             </a>
+            <span class="text-sm opacity-40 mx-2">/</span>
+            <a href="/journal" class="text-sm underline font-medium hover:opacity-70">
+              Field Notes archive →
+            </a>
           </div>
         )
       }
@@ -675,21 +679,6 @@ const categories = ["All", "Personal", "Experimental", "Technical"];
 </SinglePageLayout>
 
 <style>
-  /* Slow bounce animation for emoji */
-  @keyframes bounce-slow {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  .animate-bounce-slow {
-    animation: bounce-slow 3s ease-in-out infinite;
-  }
-
   /* Line clamp for project descriptions */
   .line-clamp-3 {
     display: -webkit-box;
