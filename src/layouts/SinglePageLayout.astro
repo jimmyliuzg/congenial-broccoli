@@ -19,8 +19,9 @@ const navLinks = [
     { label: "About", href: isHomepage ? "#about" : "/#about" },
     { label: "Writing", href: isHomepage ? "#writing" : "/writing" },
     { label: "Journal", href: "/journal" },
-    { label: "Contact", href: isHomepage ? "#contact" : "/#contact" },
 ];
+
+const contactHref = isHomepage ? "#contact" : "/#contact";
 ---
 
 <!doctype html>
@@ -48,6 +49,8 @@ const navLinks = [
             <div
                 class="max-w-6xl mx-auto px-5 md:px-10 pt-4 pb-3 flex justify-between items-baseline gap-6"
             >
+                <!-- Left-aligned: wordmark + page links -->
+                <div class="flex items-baseline gap-8">
                 <a
                     href={isHomepage ? "#hero" : "/"}
                     class="text-lg md:text-xl font-bold tracking-[0.01em] text-accent dark:text-accent-dark hover:text-secondary dark:hover:text-secondary-dark transition-colors shrink-0"
@@ -55,8 +58,6 @@ const navLinks = [
                     Jimmy Liu
                 </a>
 
-                <!-- Right-aligned link cluster -->
-                <div class="flex items-baseline gap-6">
                 <!-- Desktop Navigation -->
                 <ul class="hidden md:flex gap-6 text-xs font-medium uppercase tracking-[0.08em]">
                     {
@@ -73,9 +74,16 @@ const navLinks = [
                         ))
                     }
                 </ul>
+                </div>
 
-                <!-- Social + Dark Mode Toggle -->
+                <!-- Right-aligned: contact + social + toggle -->
                 <div class="flex items-center gap-4 text-xs font-medium uppercase tracking-[0.08em]">
+                    <a
+                        href={contactHref}
+                        class="text-accent dark:text-accent-dark font-bold hover:text-secondary dark:hover:text-secondary-dark transition-colors"
+                    >
+                        Contact
+                    </a>
                     <a
                         href="https://github.com/jimmyliuzg"
                         target="_blank"
@@ -120,7 +128,6 @@ const navLinks = [
                         </svg>
                     </button>
                 </div>
-                </div>
             </div>
             <div class="max-w-6xl mx-auto px-5 md:px-10">
                 <div class="border-t border-accent dark:border-accent-dark"></div>
@@ -137,7 +144,7 @@ const navLinks = [
                             <li>
                                 <a
                                     href={link.href}
-                                    class="block px-6 py-3 hover:bg-black/5 dark:hover:bg-white/5 uppercase tracking-wider text-sm font-medium"
+                                    class="block px-6 py-3 hover:bg-accent/5 dark:hover:bg-accent-dark/5 uppercase tracking-wider text-sm font-medium"
                                     data-section={link.href.replace(/^\/?#/, "")}
                                 >
                                     {link.label}
@@ -145,6 +152,14 @@ const navLinks = [
                             </li>
                         ))
                     }
+                    <li>
+                        <a
+                            href={contactHref}
+                            class="block px-6 py-3 hover:bg-accent/5 dark:hover:bg-accent-dark/5 uppercase tracking-wider text-sm font-bold text-accent dark:text-accent-dark"
+                        >
+                            Contact
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>

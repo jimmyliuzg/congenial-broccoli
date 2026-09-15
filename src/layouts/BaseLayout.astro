@@ -17,7 +17,6 @@ const pageLinks = [
   { label: "Projects", href: "/projects" },
   { label: "Writing", href: "/writing" },
   { label: "Journal", href: "/journal" },
-  { label: "Contact", href: "/contact" },
 ];
 
 const isActive = (href: string) =>
@@ -42,6 +41,8 @@ const isActive = (href: string) =>
     class="fixed top-0 left-0 right-0 z-50 bg-light-bg dark:bg-dark-bg transition-transform duration-300"
   >
     <div class="max-w-6xl mx-auto px-5 md:px-10 pt-4 pb-3 flex justify-between items-baseline gap-6">
+      <!-- Left-aligned: wordmark + page links -->
+      <div class="flex items-baseline gap-8">
       <a
         href="/"
         class="text-lg md:text-xl font-bold tracking-[0.01em] text-accent dark:text-accent-dark hover:text-secondary dark:hover:text-secondary-dark transition-colors shrink-0"
@@ -49,8 +50,6 @@ const isActive = (href: string) =>
         Jimmy Liu
       </a>
 
-      <!-- Right-aligned link cluster -->
-      <div class="flex items-baseline gap-6">
         <!-- Desktop Navigation -->
         <ul class="hidden md:flex gap-6 text-xs font-medium uppercase tracking-[0.08em]">
           {
@@ -67,9 +66,17 @@ const isActive = (href: string) =>
             ))
           }
         </ul>
+      </div>
 
-        <!-- Social + Dark Mode Toggle -->
-        <div class="flex items-center gap-4 text-xs font-medium uppercase tracking-[0.08em]">
+      <!-- Right-aligned: contact + social + toggle -->
+      <div class="flex items-center gap-4 text-xs font-medium uppercase tracking-[0.08em]">
+          <a
+            href="/contact"
+            aria-current={isActive("/contact") ? "page" : undefined}
+            class={`transition-colors ${isActive("/contact") ? "is-current font-bold" : "text-accent dark:text-accent-dark font-bold hover:text-secondary dark:hover:text-secondary-dark"}`}
+          >
+            Contact
+          </a>
           <a
             href="https://github.com/jimmyliuzg"
             target="_blank"
@@ -114,7 +121,6 @@ const isActive = (href: string) =>
             </svg>
           </button>
         </div>
-      </div>
     </div>
     <div class="max-w-6xl mx-auto px-5 md:px-10">
       <div class="border-t border-accent dark:border-accent-dark"></div>
@@ -139,6 +145,15 @@ const isActive = (href: string) =>
             </li>
           ))
         }
+        <li>
+          <a
+            href="/contact"
+            aria-current={isActive("/contact") ? "page" : undefined}
+            class="block px-6 py-3 uppercase tracking-wider text-sm font-bold text-accent dark:text-accent-dark"
+          >
+            Contact
+          </a>
+        </li>
       </ul>
     </div>
   </nav>
