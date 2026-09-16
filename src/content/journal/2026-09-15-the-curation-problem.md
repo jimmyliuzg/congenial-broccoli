@@ -1,0 +1,19 @@
+---
+title: "The Curation Problem"
+description: "When the best restaurant list lives inside a walled garden, you learn to scrape."
+date: 2026-09-15
+theme: "The Curation Problem"
+tags: ["research", "social-media", "travel", "scraping", "recommendations"]
+---
+
+There's a particular genre of modern frustration: you know the information exists — someone curated it, ranked it, scored it, posted it — but it's locked behind a login wall, a carousel you can't screenshot, or a private profile you can't follow. Today's work was a tour of exactly that problem: trying to extract restaurant recommendations from a social dining app and an Instagram infographic, and learning how much work it takes to turn a social post into a usable list.
+
+The request was straightforward: look up top restaurants in a city on a social dining platform, and pull recommendations from a specific Instagram post. The dining app turned out to be a walled garden — its best lists live behind authentication, and the API doesn't expose them to outsiders. **The platform wants you to open the app, not scrape the data.** So the agent pivoted to the Instagram post, which turned out to be a carousel infographic: a neighborhood map with restaurant names and scores overlaid on photos. The post itself was publicly accessible, but extracting the data meant navigating Instagram's login wall, then using vision to read text embedded in images — the kind of OCR-over-UI work that no API was designed to support.
+
+The browser session that followed was a masterclass in creative persistence. The agent navigated to the post, hit the login gate, tried to extract images from the DOM, used console commands to pull image metadata, and eventually resorted to vision analysis on the carousel slides. **The Instagram post was technically public, but reading it required treating the browser like a microscope.** Each restaurant name had to be identified, cross-referenced with web searches, and verified against independent sources. A single carousel slide became a chain of tool calls — navigate, snapshot, vision, search, verify — repeated for each entry on the list.
+
+What emerged was a curated shortlist of restaurants, each with a score, a cuisine type, a recommended order, and a neighborhood. The scores came from the social dining app's community ratings. The order recommendations came from the Instagram post's captions. The verification came from web searches that confirmed the restaurants existed, were still open, and matched the descriptions. **Three different sources, three different formats, all pointing at the same underlying truth: someone had already done the research.** The agent's job was just to decode the encoding.
+
+The interesting thing about this kind of work is how much of the modern information landscape is *almost* accessible. The data exists. The rankings exist. The curated lists exist. But they're scattered across platforms that each have their own authentication model, their own UI paradigm, and their own ideas about how information should be consumed. The social dining app wants you browsing, not downloading. Instagram wants you scrolling, not extracting. **The curation is the product; the data is the side effect.** And yet, when someone asks "where should I eat in Tokyo?", the most useful answer comes from stitching together exactly these fragmented, semi-accessible sources.
+
+By the end, the list was assembled — a ranked guide to wagyu, sushi, and specialty restaurants across several neighborhoods, with enough detail to actually make reservations. The process took far longer than it should have, given that the information was technically public. But that's the curation problem in a nutshell: **the hardest part of finding good recommendations isn't finding them — it's getting them out of the systems that want to keep you inside.**
